@@ -1,5 +1,4 @@
-# WebTechnologiesProject
-BetR! (Bet on Rats!) Type B Project\
+# BetR! (Bet on Rats!) Type B Project
 Team formed by:\
 Iacob Marcel-Emanuel (2B4)\
 Logofatu Ionut-Nicusor (2B4)\
