@@ -1,0 +1,87 @@
+body {
+    font-family: Garamond, serif;
+    color      : black;
+    margin     : 0;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+.background {
+    height             : 100vh;
+    background-image   : linear-gradient(rgba(233, 157, 95, 0.5), rgba(233, 157, 95, 0.5)), url("../images/rat-race.jpg");
+    background-position: center;
+    background-size    : cover;
+    overflow-x         : hidden;
+    position           : relative;
+}
+
+.column {
+    margin          : auto;
+    width           : 33.3%;
+    margin-bottom   : 16px;
+    padding         : 3px 8px;
+    background-color: white;
+    opacity         : 0.9;
+}
+
+.card {
+    margin: 8px;
+}
+
+.card_contents {
+    padding: 10px 16px;
+
+}
+
+.about-section {
+    padding         : 20px;
+    padding-left    : 260px;
+    text-align      : center;
+    background-color: #f1a10c;
+    color           : white;
+
+    top: 0;
+
+}
+
+
+
+.button {
+    border          : none;
+    outline         : 0;
+    display         : inline-block;
+    padding         : 30px;
+    margin-top      : 20px;
+    color           : white;
+    background-color: #f1a10c;
+    text-align      : center;
+    cursor          : pointer;
+    width           : 100%;
+    font-size       : 20px;
+}
+
+.button:hover {
+    background-color: #ffc65d;
+}
+
+.resize {
+    width        : 150px;
+    height       : auto;
+    padding-right: 50px;
+}
+
+img {
+    width        : 20px;
+    height       : 20px;
+    display      : inline;
+    padding-right: 10px;
+}
+
+@media screen and (max-width: 650px) {
+    .column {
+        width  : 100%;
+        display: block;
+    }
+}
