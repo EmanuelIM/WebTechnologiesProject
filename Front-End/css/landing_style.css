@@ -29,7 +29,7 @@ a li {
   display        : block;
   color          : white;
   text-align     : center;
-  padding        : 50px 50px;
+  padding        : 30px 50px;
   text-decoration: none;
 }
 
@@ -43,7 +43,7 @@ a li:hover:not(.active) {
 }
 
 .resize {
-  width        : 100px;
+  width        : 70px;
   height       : auto;
   padding-right: 50px;
 }
