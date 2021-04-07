@@ -1,3 +1,37 @@
+input,
+select {
+    width        : 100%;
+    padding      : 12px 20px;
+    margin       : 8px 0;
+    color        : white;
+    display      : inline-block;
+    border       : 1px solid rgb(3, 0, 0);
+    border-radius: 10px;
+    box-sizing   : border-box;
+    font-size    : 20px;
+}
+
+input:focus {
+    transition-duration: 0.8s;
+    background-color   : #f1a10c;
+}
+
+input[type=submit] {
+    width           : 100%;
+    background-color: sandybrown;
+    color           : white;
+    padding         : 14px 20px;
+    margin          : 8px 0;
+    border          : none;
+    border-radius   : 4px;
+    cursor          : pointer;
+}
+
+input[type=submit]:hover {
+    background-color   : rgb(246, 131, 111);
+    transition-duration: 0.5s;
+}
+
 * {
     padding        : 0;
     margin         : 0;
@@ -230,15 +264,6 @@ main {
 }
 
 .card-header button {
-    background   : coral;
-    border-radius: 10px;
-    color        : #fff;
-    font-size    : .8rem;
-    padding      : .5rem 1rem;
-    border       : 1px solid coral;
-}
-
-.sign-out-button {
     background   : coral;
     border-radius: 10px;
     color        : #fff;
