@@ -8,6 +8,7 @@
     <link rel="stylesheet"
         href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/maketicket.css">
     <title>Document</title>
 </head>
 
@@ -100,49 +101,48 @@
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Recent Projects</h3>
-                            <button>See all <span class="las la-arrow-right"></span></button>
+                            <h3>All Matches</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table width="100%">
                                     <thead>
                                         <tr>
-                                            <td>Project Title</td>
-                                            <td>Departament</td>
-                                            <td>Status</td>
+                                            <td>Match</td>
+                                            <td style="padding-left:7%;">1</td>
+                                            <td style="padding-left: 30%;">2</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>UI/UX Design</td>
-                                            <td>UI team</td>
-                                            <td><span class="status purple"></span>review</td>
+                                            <td>Marcel Vs Ionut</td>
+                                            <td><input class="largeBTN" type="button" id="firstButton" value="1.4" onclick="resetSecondButton()"></td>
+                                            <td><input class="largeBTN" type="button" id="secondButton" value="1.6" onclick="resetFirstButton()"></td>
                                         </tr>
                                         <tr>
-                                            <td>Web Development</td>
-                                            <td>Frontend team</td>
-                                            <td><span class="status pink"></span>in progress</td>
+                                            <td>Marcel Vs Ionut</td>
+                                            <td><input class="largeBTN" type="button" id="thirdButton" value="1.5" onclick="resetForthButton()"></td>
+                                            <td><input class="largeBTN" type="button" id="forthButton" value="1.3" onclick="resetThirdButton()"></td>
                                         </tr>
                                         <tr>
-                                            <td>Ushop app</td>
-                                            <td>Mobile team</td>
-                                            <td><span class="status orange"></span>pending</td>
+                                            <td>Marcel Vs Ionut</td>
+                                            <td><input class="largeBTN" type="button" id="fifthButton" value="1.2" onclick="resetSixthButton()"></td>
+                                            <td><input class="largeBTN" type="button" id="sixthButton" value="1.3" onclick="resetFifthButton()"></td>
                                         </tr>
                                         <tr>
-                                            <td>UI/UX Design</td>
-                                            <td>UI team</td>
-                                            <td><span class="status purple"></span>review</td>
+                                            <td>Marcel Vs Ionut</td>
+                                            <td><input class="largeBTN" type="button" id="seventhButton" value="1.1" onclick="resetEighthButton()"></td>
+                                            <td><input class="largeBTN" type="button" id="eighthButton" value="1.9" onclick="resetSeventhButton()"></td>
                                         </tr>
                                         <tr>
-                                            <td>Web Development</td>
-                                            <td>Frontend team</td>
-                                            <td><span class="status pink"></span>in progress</td>
+                                            <td>Marcel Vs Ionut</td>
+                                            <td><input class="largeBTN" type="button" id="ninthButton" value="2.5" onclick="resetTenthButton()"></td>
+                                            <td><input class="largeBTN" type="button" id="tenthButton" value="1.1" onclick="resetNinthButton()"></td>
                                         </tr>
                                         <tr>
-                                            <td>Ushop app</td>
-                                            <td>Mobile team</td>
-                                            <td><span class="status orange"></span>pending</td>
+                                            <td>Marcel Vs Ionut</td>
+                                            <td><input class="largeBTN" type="button" id="eleventhButton" value="2" onclick="resetTwelfthButton()"></td>
+                                            <td><input class="largeBTN" type="button" id="twelfthButton" value="1.3" onclick="resetEleventhButton()"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -153,65 +153,43 @@
                 <div class="customers">
                     <div class="card">
                         <div class="card-header">
-                            <h3>New customer</h3>
-                            <button>See all <span class="las la-arrow-right"></span></button>
+                            <h3>Your ticket</h3>
                         </div>
                         <div class="card-body">
                             <div class="customer">
                                 <div class="info">
-                                    <img src="images/rats.png" width="40px" height="40px" alt="">
-                                    <div>
-                                        <h4>Lewis S. Cunningham</h4>
-                                        <small>Ceo Excerpt</small>
-                                    </div>
+                                    <h2>Total elevation</h2>
                                 </div>
                                 <div class="contact">
-                                    <span class="las la-user-circle"></span>
-                                    <span class="las la-comment"></span>
-                                    <span class="las la-phone"></span>
+                                    <h2>Total mathces</h2>
                                 </div>
                             </div>
                             <div class="customer">
                                 <div class="info">
-                                    <img src="images/rats.png" width="40px" height="40px" alt="">
-                                    <div>
-                                        <h4>Lewis S. Cunningham</h4>
-                                        <small>Ceo Excerpt</small>
-                                    </div>
+                                    <input  class="borderOnClick" type="text" id="elev" value="0" style="text-align: center;"></input>
                                 </div>
                                 <div class="contact">
-                                    <span class="las la-user-circle"></span>
-                                    <span class="las la-comment"></span>
-                                    <span class="las la-phone"></span>
+                                    <input  class="borderOnClick" type="text" id="inc" value="0" style="text-align: center;"></input>
                                 </div>
                             </div>
-                            <div class="customer">
-                                <div class="info">
-                                    <img src="images/rats.png" width="40px" height="40px" alt="">
-                                    <div>
-                                        <h4>Lewis S. Cunningham</h4>
-                                        <small>Ceo Excerpt</small>
-                                    </div>
-                                </div>
-                                <div class="contact">
-                                    <span class="las la-user-circle"></span>
-                                    <span class="las la-comment"></span>
-                                    <span class="las la-phone"></span>
+                            <div>
+                                <h2  class="ammount">Enter your amount</h2>
+                                <div>
+                                    <input  class="borderOnClick alignBtn" type="number" id="ticketValue" placeholder="Enter how much money do you want to bet...">
                                 </div>
                             </div>
-                            <div class="customer">
-                                <div class="info">
-                                    <img src="images/rats.png" width="40px" height="40px" alt="">
-                                    <div>
-                                        <h4>Lewis S. Cunningham</h4>
-                                        <small>Ceo Excerpt</small>
-                                    </div>
+                            <div style="padding-top: 10px;">
+                                <input class="placeBet" type="button" onclick="calculateMoney()" value="Calculate how much you will make">
+                            </div>
+                            <div>
+                                <h2 class="ammount">Your ammount</h2>
+                                <div>
+                                    <input class="borderOnClick alignBtn" id="totalMoney" value="0">
                                 </div>
-                                <div class="contact">
-                                    <span class="las la-user-circle"></span>
-                                    <span class="las la-comment"></span>
-                                    <span class="las la-phone"></span>
-                                </div>
+                            </div>
+                            <div>
+                                <h2 class="ammount">Place your bet if you are happy with your rats!!</h2>
+                                <button class ="placeBet">Place your bet!!</button>
                             </div>
                         </div>
                     </div>
@@ -219,6 +197,7 @@
             </div>
         </main>
     </div>
+    <script src="js/makeMaches.js"></script>
 </body>
 
 </html>
