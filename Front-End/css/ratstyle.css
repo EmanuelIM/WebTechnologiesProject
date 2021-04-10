@@ -1,0 +1,46 @@
+#bets {
+    border-collapse: collapse;
+    width          : 100%;
+  }
+  
+  caption {
+    color    : black;
+    font-size: 30pt;
+  }
+  
+  #bets td{
+    text-align: center;
+    border    : 1px solid #ddd;
+    padding   : 8px;
+  }
+  .lose{
+      background-color: red;
+  }
+
+  .victory{
+      background-color: green;
+  }
+
+  .ratAlign{
+      padding-left: 42%;
+      padding-top: 1rem;
+      padding-bottom: 2rem;
+  }
+  
+  .ratPicture{
+      width: 150px;
+      height: 150px;
+  }
+
+  .birth{
+      padding-top: 2rem;
+  }
+
+  .details h1{
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+  }
+
+  .details p{
+      padding-left: 2rem;
+  }
