@@ -9,7 +9,7 @@
         href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/maketicket.css">
-    <title>Document</title>
+    <title>BetR! Dashboard</title>
 </head>
 
 <body>
@@ -28,8 +28,11 @@
                 <li><a href="user_profile.html"><span class="las la-users"></span>
                         <span>User Profile Settings</span></a>
                 </li>
-                <li><a href=""><span class="las la-clipboard-list"></span>
+                <li><a href="your_bets.html"><span class="las la-clipboard-list"></span>
                         <span>Your Bets</span></a>
+                </li>
+                <li><a href="create_bet.html"><span class="las la-caret-right"></span>
+                        <span>Add a match (SA Only)</span></a>
                 </li>
             </ul>
         </div>
@@ -44,7 +47,7 @@
             </h2>
             <div class="search-wrapper">
                 <span class="las la-search">
-                    <input type="search" placeholder="Search here" name="" id="">
+                    <input type="search" placeholder="Search a match here" name="" id="">
                 </span>
             </div>
             <div class="user-wrapper">
@@ -62,38 +65,38 @@
             <div class="cards">
                 <div class="card-single">
                     <div>
-                        <h1>54</h1>
-                        <span>Customers</span>
+                        <h1>6</h1>
+                        <span>Matches Today</span>
                     </div>
                     <div>
-                        <span class="las la-users"></span>
-                    </div>
-                </div>
-                <div class="card-single">
-                    <div>
-                        <h1>79</h1>
-                        <span>Projects</span>
-                    </div>
-                    <div>
-                        <span class="las la-clipboard"></span>
+                        <span class="las la-bullhorn"></span>
                     </div>
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>124</h1>
-                        <span>Orders</span>
+                        <h1>2</h1>
+                        <span>Ongoing matches</span>
                     </div>
                     <div>
-                        <span class="las la-shopping-bag"></span>
+                        <span class="las la-broadcast-tower"></span>
                     </div>
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>$6k</h1>
-                        <span>Income</span>
+                        <h1>1</h1>
+                        <span>Match(es) you have betted on (today)</span>
                     </div>
                     <div>
-                        <span class="lab la-google-wallet"></span>
+                        <span class="las la-donate"></span>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div>
+                        <h1>$17.01</h1>
+                        <span>Your current balance</span>
+                    </div>
+                    <div>
+                        <span class="las la-money-bill"></span>
                     </div>
                 </div>
             </div>
@@ -101,7 +104,7 @@
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
-                            <h3>All Matches</h3>
+                            <h3>Today's Matches</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -115,34 +118,46 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Marcel Vs Ionut</td>
-                                            <td><input class="largeBTN" type="button" id="firstButton" value="1.4" onclick="resetSecondButton()"></td>
-                                            <td><input class="largeBTN" type="button" id="secondButton" value="1.6" onclick="resetFirstButton()"></td>
+                                            <td>Carmine vs Mac Daddy</td>
+                                            <td><input class="largeBTN" type="button" id="firstButton" value="3.75"
+                                                    onclick="resetSecondButton()"></td>
+                                            <td><input class="largeBTN" type="button" id="secondButton" value="1.6"
+                                                    onclick="resetFirstButton()"></td>
                                         </tr>
                                         <tr>
-                                            <td>Marcel Vs Ionut</td>
-                                            <td><input class="largeBTN" type="button" id="thirdButton" value="1.5" onclick="resetForthButton()"></td>
-                                            <td><input class="largeBTN" type="button" id="forthButton" value="1.3" onclick="resetThirdButton()"></td>
+                                            <td>Einstein vs Happy</td>
+                                            <td><input class="largeBTN" type="button" id="thirdButton" value="1.1"
+                                                    onclick="resetForthButton()"></td>
+                                            <td><input class="largeBTN" type="button" id="forthButton" value="6"
+                                                    onclick="resetThirdButton()"></td>
                                         </tr>
                                         <tr>
-                                            <td>Marcel Vs Ionut</td>
-                                            <td><input class="largeBTN" type="button" id="fifthButton" value="1.2" onclick="resetSixthButton()"></td>
-                                            <td><input class="largeBTN" type="button" id="sixthButton" value="1.3" onclick="resetFifthButton()"></td>
+                                            <td>Bubba vs Cheeky Chops </td>
+                                            <td><input class="largeBTN" type="button" id="fifthButton" value="1.2"
+                                                    onclick="resetSixthButton()"></td>
+                                            <td><input class="largeBTN" type="button" id="sixthButton" value="1.3"
+                                                    onclick="resetFifthButton()"></td>
                                         </tr>
                                         <tr>
-                                            <td>Marcel Vs Ionut</td>
-                                            <td><input class="largeBTN" type="button" id="seventhButton" value="1.1" onclick="resetEighthButton()"></td>
-                                            <td><input class="largeBTN" type="button" id="eighthButton" value="1.9" onclick="resetSeventhButton()"></td>
+                                            <td>Hammie vs Lancelot</td>
+                                            <td><input class="largeBTN" type="button" id="seventhButton" value="1.1"
+                                                    onclick="resetEighthButton()"></td>
+                                            <td><input class="largeBTN" type="button" id="eighthButton" value="2.31"
+                                                    onclick="resetSeventhButton()"></td>
                                         </tr>
                                         <tr>
-                                            <td>Marcel Vs Ionut</td>
-                                            <td><input class="largeBTN" type="button" id="ninthButton" value="2.5" onclick="resetTenthButton()"></td>
-                                            <td><input class="largeBTN" type="button" id="tenthButton" value="1.1" onclick="resetNinthButton()"></td>
+                                            <td>Jeppy vs Sydney</td>
+                                            <td><input class="largeBTN" type="button" id="ninthButton" value="2.5"
+                                                    onclick="resetTenthButton()"></td>
+                                            <td><input class="largeBTN" type="button" id="tenthButton" value="1.4"
+                                                    onclick="resetNinthButton()"></td>
                                         </tr>
                                         <tr>
-                                            <td>Marcel Vs Ionut</td>
-                                            <td><input class="largeBTN" type="button" id="eleventhButton" value="2" onclick="resetTwelfthButton()"></td>
-                                            <td><input class="largeBTN" type="button" id="twelfthButton" value="1.3" onclick="resetEleventhButton()"></td>
+                                            <td>Jupiter vs Rex</td>
+                                            <td><input class="largeBTN" type="button" id="eleventhButton" value="2"
+                                                    onclick="resetTwelfthButton()"></td>
+                                            <td><input class="largeBTN" type="button" id="twelfthButton" value="1.1"
+                                                    onclick="resetEleventhButton()"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -161,35 +176,39 @@
                                     <h2>Total elevation</h2>
                                 </div>
                                 <div class="contact">
-                                    <h2>Total mathces</h2>
+                                    <h2>Total matches</h2>
                                 </div>
                             </div>
                             <div class="customer">
                                 <div class="info">
-                                    <input  class="borderOnClick" type="text" id="elev" value="0" style="text-align: center;"></input>
+                                    <input class="borderOnClick" type="text" id="elev" value="0"
+                                        style="text-align: center;"></input>
                                 </div>
                                 <div class="contact">
-                                    <input  class="borderOnClick" type="text" id="inc" value="0" style="text-align: center;"></input>
+                                    <input class="borderOnClick" type="text" id="inc" value="0"
+                                        style="text-align: center;"></input>
                                 </div>
                             </div>
                             <div>
-                                <h2  class="ammount">Enter your amount</h2>
+                                <h2 class="ammount">What are you willing to pay?</h2>
                                 <div>
-                                    <input  class="borderOnClick alignBtn" type="number" id="ticketValue" placeholder="Enter how much money do you want to bet...">
+                                    <input class="borderOnClick alignBtn" type="number" id="ticketValue"
+                                        placeholder="Enter how much money do you want to bet...">
                                 </div>
                             </div>
                             <div style="padding-top: 10px;">
-                                <input class="placeBet" type="button" onclick="calculateMoney()" value="Calculate how much you will make">
+                                <input class="placeBet" type="button" onclick="calculateMoney()"
+                                    value="Calculate how much you will make">
                             </div>
                             <div>
-                                <h2 class="ammount">Your ammount</h2>
+                                <h2 class="ammount">If everything goes your way, you will make..</h2>
                                 <div>
                                     <input class="borderOnClick alignBtn" id="totalMoney" value="0">
                                 </div>
                             </div>
                             <div>
                                 <h2 class="ammount">Place your bet if you are happy with your rats!!</h2>
-                                <button class ="placeBet">Place your bet!!</button>
+                                <button class="placeBet">Place your bet!!</button>
                             </div>
                         </div>
                     </div>

@@ -8,7 +8,7 @@
     <link rel="stylesheet"
         href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="css/user_profile_style.css">
-    <title>Your Profile</title>
+    <title>Create a Match</title>
 </head>
 
 <body>
@@ -24,13 +24,13 @@
                 <li><a href="index.html"><span class="las la-igloo"></span>
                         <span>Dashboard</span></a>
                 </li>
-                <li><a href="user_profile.html" class="active"><span class="las la-users"></span>
+                <li><a href="user_profile.html"><span class="las la-users"></span>
                         <span>User Profile Settings</span></a>
                 </li>
                 <li><a href="your_bets.html"><span class="las la-clipboard-list"></span>
                         <span>Your Bets</span></a>
                 </li>
-                <li><a href="create_bet.html"><span class="las la-caret-right"></span>
+                <li><a href="create_bet.html" class="active"><span class="las la-caret-right"></span>
                         <span>Add a match (SA Only)</span></a>
                 </li>
             </ul>
@@ -53,26 +53,29 @@
             </div>
         </header>
         <main>
-            <img src="images/RatMan.png" width="100px" height="auto" alt=""
-                style="float:left; align-items: center; border: 5px solid #555;">
-            <h2>Hello, John Doe! (Super Admin!)</h2>
+            <h2>Super Admin control panel for adding matches</h2>
             <br><br>
-            <h3 style="padding-bottom: 30px;">Change your profile information below</h3>
+            <h3 style="padding-bottom: 30px;">Add the information for a match below:</h3>
             <form action="">
-                <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                <input type="text" id="fname" name="firstname" placeholder="The match name..">
 
-                <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                <input type="text" id="lname" name="lastname" placeholder="First rat competitor's name..">
 
-                <input type="email" id="fname" name="firstname" placeholder="E-mail..">
+                <input type="number" step="0.01" id="lname" name="lastname" placeholder="First rat competitor's odds..">
 
-                <input type="link" id="fname" name="firstname" placeholder="New avatar link..">
+                <input type="text" id="fname" name="firstname" placeholder="Second rat competitor's name..">
 
-                <input type="password" id="fname" name="firstname" placeholder="Your current password..">
+                <input type="number" step="0.01" id="lname" name="lastname"
+                    placeholder="Second rat competitor's odds..">
+
+                <input type="date" placeholder="Date when the match will take place.." onfocus="(this.type='date')">
+
+                <input type="time" placeholder="Time when the match will take place..">
 
                 <input type="password" id="fname" name="firstname"
-                    placeholder="Repeat password (leave blank if you don't want to change it)..">
+                    placeholder="Super admin password to confirm your match..">
 
-                <input type="submit" value="Submit">
+                <input type="submit" value="Add a new match">
             </form>
         </main>
     </div>
