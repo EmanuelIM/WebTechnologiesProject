@@ -1,40 +1,37 @@
 * {
-  margin     : 0;
-  padding    : 0;
+  margin: 0;
+  padding: 0;
   font-family: Garamond, serif;
 }
 
 .background {
-  height             : 100vh;
-  background-image   : linear-gradient(rgba(233, 157, 95, 0.5), rgba(233, 157, 95, 0.5)), url("../images/rat-race.jpg");
+  height: 100vh;
+  background-image: linear-gradient(rgba(233, 157, 95, 0.5), rgba(233, 157, 95, 0.5)), url("../images/rat-race.jpg");
   background-position: center;
-  background-size    : cover;
-  overflow-x         : hidden;
-  position           : relative;
+  background-size: cover;
+  overflow-x: hidden;
+  position: relative;
+  /* To its original position*/
 }
 
 ul {
-  list-style-type : none;
-  margin          : 0;
-  padding         : 0;
-  overflow        : hidden;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
   background-color: #333;
 }
 
-li {
-  float: left;
-}
-
 a li {
-  display        : block;
-  color          : white;
-  text-align     : center;
-  padding        : 30px 50px;
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 30px 50px;
   text-decoration: none;
 }
 
 a li:hover:not(.active) {
-  text-align      : center;
+  text-align: center;
   background-color: #f1a10c;
 }
 
@@ -43,49 +40,39 @@ a li:hover:not(.active) {
 }
 
 .resize {
-  width        : 70px;
-  height       : auto;
+  width: 70px;
+  height: auto;
   padding-right: 50px;
 }
 
-.button-link {
-  background: transparent;
-  border    : none;
-  outline   : none;
-  display   : block;
-  height    : 200px;
-  width     : 200px;
-  cursor    : pointer;
-}
-
 .button {
-  background-color   : #f1a10c;
-  border             : none;
-  color              : white;
-  padding            : 16px 32px;
-  text-align         : center;
-  text-decoration    : none;
-  display            : inline-block;
-  font-size          : 16px;
-  margin             : 4px 2px;
+  background-color: #f1a10c;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
   transition-duration: 0.4s;
-  cursor             : pointer;
+  cursor: pointer;
 }
 
 .button1 {
   background-color: #f1a10c;
-  color           : white;
+  color: white;
 }
 
 .button1:hover {
   background-color: white;
-  color           : black;
-  border          : 2px solid #555555;
+  color: black;
+  border: 2px solid #555555;
 }
 
 .header {
   padding-top: 300px;
-  text-align : center;
-  color      : white;
-  font-size  : 30px;
+  text-align: center;
+  color: white;
+  font-size: 30px;
 }

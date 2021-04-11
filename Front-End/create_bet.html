@@ -15,7 +15,7 @@
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
         <div class="sidebar-brand">
-            <h2><span><img src="https://img.icons8.com/emoji/48/000000/rat-emoji.png" /></span><span>Bet on Rats!</span>
+            <h2><span><img src="https://img.icons8.com/emoji/48/000000/rat-emoji.png" alt = "Rat pic" /></span><span>Bet on Rats!</span>
             </h2>
         </div>
 
@@ -51,7 +51,7 @@
                 Your Profile
             </h2>
             <div class="user-wrapper">
-                <img src="images/RatMan.png" width="30px" height="30px" alt="">
+                <img src="images/RatMan.png" width="30px" height="30px" alt="Rat profile picture">
                 <div>
                     <h4>John Doe</h4>
                     <small>Super Admin</small>
@@ -63,22 +63,22 @@
             <br><br>
             <h3 style="padding-bottom: 30px;">Add the information for a match below:</h3>
             <form action="">
-                <input type="text" id="fname" name="firstname" placeholder="The match name..">
+                <input type="text" id="mname" name="matchname" placeholder="The match name..">
 
-                <input type="text" id="lname" name="lastname" placeholder="First rat competitor's name..">
+                <input type="text" id="frname" name="firstratname" placeholder="First rat competitor's name..">
 
-                <input type="number" step="0.01" id="lname" name="lastname" placeholder="First rat competitor's odds..">
+                <input type="number" step="0.01" id="frodds" name="firstratodds" placeholder="First rat competitor's odds..">
 
-                <input type="text" id="fname" name="firstname" placeholder="Second rat competitor's name..">
+                <input type="text" id="srname" name="secondratname" placeholder="Second rat competitor's name..">
 
-                <input type="number" step="0.01" id="lname" name="lastname"
+                <input type="number" step="0.01" id="srodds" name="secondratodds"
                     placeholder="Second rat competitor's odds..">
 
-                <input type="date" placeholder="Date when the match will take place.." onfocus="(this.type='date')">
+                <input type="date">
 
-                <input type="time" placeholder="Time when the match will take place..">
+                <input type="time">
 
-                <input type="password" id="fname" name="firstname"
+                <input type="password" id="pass" name="password"
                     placeholder="Super admin password to confirm your match..">
 
                 <input type="submit" value="Add a new match">

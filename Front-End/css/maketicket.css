@@ -1,17 +1,17 @@
 .placeBet {
-    background   : coral;
+    background: coral;
     border-radius: 10px;
-    color        : #fff;
-    font-size    : .8rem;
-    padding      : .5rem 1rem;
-    border       : 1px solid coral;
-    width        : 100%;
-    font-size    : 1rem;
+    color: #fff;
+    font-size: .8rem;
+    padding: .5rem 1rem;
+    border: 1px solid coral;
+    width: 100%;
+    font-size: 1rem;
 }
 
 .ammount {
-    text-align    : center;
-    padding-top   : 2rem;
+    text-align: center;
+    padding-top: 2rem;
     padding-bottom: 1rem;
 }
 
@@ -20,15 +20,15 @@
 }
 
 .alignBtn {
-    width     : 100%;
+    width: 100%;
     text-align: center;
 }
 
 .borderOnClick {
-    font-size    : 2rem;
+    font-size: 2rem;
     border-radius: 7px;
-    color        : black;
-    font-size    : .8rem;
-    padding      : .5rem .5rem;
-    border       : 1px solid coral;
+    color: black;
+    font-size: .8rem;
+    padding: .5rem .5rem;
+    border: 1px solid coral;
 }
