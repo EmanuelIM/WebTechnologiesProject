@@ -1,3 +1,8 @@
+<?php 
+	include "includes/db_connection.php";
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -18,7 +23,7 @@
 			<a href="signup.html">
 				<li>SIGN UP</li>
 			</a>
-			<a href="login.html">
+			<a href="login.php">
 				<li>LOG IN</li>
 			</a>
 			<a href="about_page.html">
@@ -33,7 +38,7 @@
 			<img src="images/ratslog.png">
 		</div>
 		<div class="login-content">
-			<form action="index.html">
+			<form action="index.php" method="post" id="login-form" autocomplete="off">
 				<h2 class="title">Welcome Back</h2>
 				<div class="input-div one">
 					<div class="i">
@@ -41,7 +46,8 @@
 					</div>
 					<div class="div">
 						<h5>Username</h5>
-						<input type="text" class="input">
+						<input type="text" class="input" name="username" id="username" autocomplete="on" value="<?php echo isset($username) ? $username : '' ?>">
+						<p><?php echo isset($error['username']) ? $error['username'] : '' ?></p>
 					</div>
 				</div>
 				<div class="input-div pass">

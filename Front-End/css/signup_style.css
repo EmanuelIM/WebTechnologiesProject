@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+.problem{
+    padding-left: 100px;
+}
+
 body, input {
     font-family: Garamond, serif;
 }

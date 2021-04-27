@@ -1,3 +1,8 @@
+<?php 
+    include "includes/db_connection.php";
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,6 +18,13 @@
 </head>
 
 <body>
+    <?php 
+        if($connection){
+            echo "<h1 class='text-center'>Connected</h1>";
+        }else{
+            echo "<h1 class='text-center'>No connection</h1>";
+        }
+    ?>
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
         <div class="sidebar-brand">
@@ -22,7 +34,7 @@
 
         <div class="sidebar-menu">
             <ul>
-                <li><a href="index.html" class="active"><span class="las la-igloo"></span>
+                <li><a href="index.php" class="active"><span class="las la-igloo"></span>
                         <span>Dashboard</span></a>
                 </li>
                 <li><a href="user_profile.html"><span class="las la-users"></span>
