@@ -1,5 +1,6 @@
 <?php 
 	include "includes/db_connection.php";
+	include "includes/functions.php";
 
 	if($_SERVER['REQUEST_METHOD'] == "POST"){
 		$username    = trim($_POST['username']);
@@ -22,9 +23,15 @@
 		 if($username == ''){
 			$error['username'] = 'Username cannot be empty';
 		 }
+		 if(username_exists($username,$connection)){
+			$error['username'] = "Username already exists";
+		 }
 
 		 if($email ==''){
 			$error['email'] = "Email cannot be empty";
+		 }
+		 if(email_exists($email,$connection)){
+			$error['email'] = "Email already exists";
 		 }
 
 		 if(strlen($password) < 4){
@@ -34,6 +41,7 @@
 			$error['password'] = 'Password cannot be empty';
 		 }
 
+
 		 foreach ($error as $key => $value) {
 			if(empty($value)){
 				unset($error[$key]);
@@ -41,26 +49,7 @@
 		 }
 
 		 if(empty($error)){
-				$username   = mysqli_real_escape_string($connection, $username);
-                $email      = mysqli_real_escape_string($connection, $email);
-                $password   = mysqli_real_escape_string($connection, $password);
-                $first_name  = mysqli_real_escape_string($connection, $first_name);
-                $second_name = mysqli_real_escape_string($connection, $second_name);
-				$age  = mysqli_real_escape_string($connection, $age);
-                $country = mysqli_real_escape_string($connection, $country);
-
-                $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
-
-                $query = "INSERT INTO users (first_name, second_name, country, email, password, age, nickname)";
-                $query .= "VALUES('{$first_name}', '{$second_name}', '{$country}', '{$email}', '{$password}', '{$age}', '{$username}')";
-                $register_user_query = mysqli_query($connection, $query);
-
-                if(!$register_user_query ){
-					die("Query failed" . mysqli_error($connection));
-				}else{
-					header('Location: index.php');
-					exit();
-				}
+			register_user($connection,$username,$email,$password,$first_name,$second_name,$age,$country);
 		}
 	}
 ?>
