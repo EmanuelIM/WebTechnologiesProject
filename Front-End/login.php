@@ -1,5 +1,47 @@
 <?php 
 	include "includes/db_connection.php";
+
+	if($_SERVER['REQUEST_METHOD'] == "POST"){
+		$username    = trim($_POST['username']);
+		$password   = trim($_POST['password']); 
+		$row;
+		$db_password;
+		$error = [
+			'username' => '',
+			'password' => ''
+		 ];
+		$username = mysqli_real_escape_string($connection, $username);
+      	$password = mysqli_real_escape_string($connection, $password);
+
+		$query = "SELECT password FROM users WHERE nickname = '{$username}'";
+		$select_user_query = mysqli_query($connection, $query);
+
+		if(!$select_user_query){
+			die ("Query failed " . mysqli_error($connection));
+		}
+
+		if(mysqli_num_rows($select_user_query) == 0){
+			$error['username'] = 'Username does not exist.';
+		}else{
+			$row = mysqli_fetch_array($select_user_query);
+			$db_password = $row['password'];
+			if(!password_verify($password, $db_password)){
+				$error['password'] = 'Wrong password';
+			}
+		}
+
+		foreach ($error as $key => $value) {
+			if(empty($value)){
+				unset($error[$key]);
+			}
+		 }
+
+		if(empty($error)){
+			header('Location: index.php');
+			exit();
+		}
+
+	}
 ?>
 
 
@@ -20,7 +62,7 @@
 <body>
 	<div class="navbar">
 		<ul>
-			<a href="signup.html">
+			<a href="signup.php">
 				<li>SIGN UP</li>
 			</a>
 			<a href="login.php">
@@ -38,7 +80,7 @@
 			<img src="images/ratslog.png">
 		</div>
 		<div class="login-content">
-			<form action="index.php" method="post" id="login-form" autocomplete="off">
+			<form action="" method="post" id="login-form" autocomplete="off">
 				<h2 class="title">Welcome Back</h2>
 				<div class="input-div one">
 					<div class="i">
@@ -46,19 +88,29 @@
 					</div>
 					<div class="div">
 						<h5>Username</h5>
-						<input type="text" class="input" name="username" id="username" autocomplete="on" value="<?php echo isset($username) ? $username : '' ?>">
-						<p><?php echo isset($error['username']) ? $error['username'] : '' ?></p>
+						<input type="text" class="input" name="username" id="username" autocomplete="on" >
 					</div>
 				</div>
+				<?php  if(isset($error['username'])){
+					echo "<div>
+							<a class='btn' href='signup.php' style='color:white; padding-top: 1vh; text-align:center;'>New Here?</a>
+						 </div>";
+				}?>
 				<div class="input-div pass">
 					<div class="i">
 						<i class="fas fa-lock"></i>
 					</div>
 					<div class="div">
 						<h5>Password</h5>
-						<input type="password" class="input">
+						<input class="input" type="password" name="password" id="key" class="form-control" >
 					</div>
 				</div>
+				<?php  if(isset($error['password'])){
+					echo "<div>
+							<p class='btn' style=' padding: 10px 0px'>". $error['password']. "</p>
+						 </div>";
+				}
+				?>
 				<a href="#">Forgot Password?</a>
 				<input type="submit" class="btn" value="Login">
 			</form>

@@ -4,6 +4,8 @@
 	box-sizing: border-box;
 }
 
+
+
 body {
 	font-family: Garamond, serif;
 	overflow: hidden;
@@ -163,7 +165,7 @@ a {
 }
 
 a:hover {
-	color: #eb981d;
+	color: white;
 }
 
 .btn {
@@ -221,3 +223,4 @@ a:hover {
 		justify-content: center;
 	}
 }
+
