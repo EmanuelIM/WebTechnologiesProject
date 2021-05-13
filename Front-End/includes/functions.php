@@ -45,5 +45,34 @@ function email_exists($email,$connection){
     }
   }
   
+  function rat_exists($rat_name,$connection){
+    $query = "SELECT name FROM rat WHERE name = '$rat_name'";
+    $result = mysqli_query($connection, $query);
+  
+    if(mysqli_num_rows($result) > 0){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  function addrat($connection,$rat_name,$birthday,$description,$birthPlace,$gender,$club){
+    $rat_name   = mysqli_real_escape_string($connection, $rat_name);
+    $birthday   = mysqli_real_escape_string($connection, $birthday);
+    $description= mysqli_real_escape_string($connection, $description);
+    $birthPlace = mysqli_real_escape_string($connection, $birthPlace);
+    $gender     = mysqli_real_escape_string($connection, $gender);
+    $club       = mysqli_real_escape_string($connection, $club);
+
+    $query = "INSERT INTO rat (name, birthday, description, birth_place, gender, club)";
+    $query .= "VALUES('{$rat_name}', '{$birthday}', '{$description}', '{$birthPlace}', '{$gender}', '{$club}')";
+    $register_user_query = mysqli_query($connection, $query);
+    if(!$register_user_query ){
+        die("Query failed" . mysqli_error($connection));
+    }else{
+        header('Location: index.php');
+        exit();
+    }
+  }
 
 ?>

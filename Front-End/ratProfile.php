@@ -1,3 +1,20 @@
+<?php 
+    include "includes/db_connection.php";
+
+    
+    $query = "SELECT * FROM rat WHERE id = 5";
+    $select_all_posts_query = mysqli_query($connection, $query);
+    $row = mysqli_fetch_assoc($select_all_posts_query);
+
+    $ratname             = $row['name'];
+    $birthDate           = $row['birthday'];
+    $description         = $row['description'];
+    $last_five_matches	 = $row['last_five_matches'];
+    $birthPlace          = $row['birth_place'];
+    $gender              = $row['gender'];
+    $club                = $row['club'];
+?>  
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,6 +57,9 @@
                 <li><a href="credit_card.html"><span class="las la-wallet"></span>
                         <span>Add Money</span></a>
                 </li>
+                <li><a href="add_rat.php"><span class="las la-id-badge"></span>
+                    <span>Add Rat</span></a>
+                </li>
             </ul>
         </div>
     </div>
@@ -60,7 +80,7 @@
             </div>
         </header>
         <main>
-            <h1 style="text-align: center;">Jean-Claude Van Damme</h1>
+            <h1 style="text-align: center;"><?php echo $ratname ?></h1>
             <div class="ratAlign">
                 <img src="images/RatMan.png" class="ratPicture" alt="">
             </div>
@@ -77,23 +97,14 @@
                 </tr>
             </table>
             <div class="birth">
-                <h2>Birth Place: Paris-France</h2>
-                <h2>Age : 21</h2>
-                <h2>Gender : M</h2>
-                <h2>Club : PSG</h2>
+                <h2>Birth Place: <?php echo $birthPlace ?></h2>
+                <h2>Birth Date : <?php echo $birthDate  ?></h2>
+                <h2>Gender     : <?php echo $gender ?></h2>
+                <h2>Club       : <?php echo $club ?></h2>
             </div>
             <div class="details">
                 <h1>Short description:</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer aliquet in dolor at mollis.
-                    Quisque tincidunt tellus commodo iaculis rutrum. Phasellus molestie aliquet diam, sed faucibus est
-                    elementum nec.
-                    Integer convallis nibh quam, vel faucibus tortor tempor vitae. Mauris venenatis lorem dapibus,
-                    cursus sapien eu, viverra justo.
-                    Morbi semper magna nisi, eget interdum nisi malesuada ut. Suspendisse feugiat elit in lobortis
-                    tempor.
-                    Donec dapibus feugiat orci quis convallis. In vitae luctus quam, eu dictum nisl.
-                    Praesent eu justo id ipsum condimentum sollicitudin vel et nisl. Donec eleifend luctus ultrices.
-                    Nunc blandit dui id tempus imperdiet.</p>
+                <p><?php echo $description ?></p>
             </div>
         </main>
     </div>

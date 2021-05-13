@@ -31,6 +31,7 @@ caption {
 .ratPicture {
   width: 150px;
   height: 150px;
+  align-self: center;
 }
 
 .birth {
