@@ -1,3 +1,19 @@
+<?php 
+
+    include "includes/db_connection.php";
+    include "includes/functions.php";
+
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
+        $firstrat     = trim($_POST['firstrat']);
+        $secondrat    = trim($_POST['secondrat']);
+        $firstodds    = trim($_POST['firstodds']);
+        $secondodds   = trim($_POST['secondratodds']);
+
+
+        addbet($connection,$firstrat,$secondrat,$firstodds,$secondodds);
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,21 +81,39 @@
             <h2>Super Admin control panel for adding matches</h2>
             <br><br>
             <h3 style="padding-bottom: 30px;">Add the information for a match below:</h3>
-            <form action="">
-                <input type="text" id="mname" name="matchname" placeholder="The match name..">
+            <form action="" method="post" id="login-form" autocomplete="off">
 
-                <input type="text" id="frname" name="firstratname" placeholder="First rat competitor's name..">
+                <?php  
+                    $query = "SELECT * FROM rat";
+                    $select_comment_query = mysqli_query($connection, $query);
+                    $first_row = mysqli_query($connection, $query);
+                    if(!$select_comment_query){
+                        die('QUERY FAILED' . mysqli_error($connection));
+                    }
+                ?>
 
-                <input type="number" step="0.01" id="frodds" name="firstratodds" placeholder="First rat competitor's odds..">
+                <select name="firstrat" id="firstrat" autocomplete="on" >
+                    <option value="">-</option>
+                    <?php 
+                        while($fir_row = mysqli_fetch_array($select_comment_query)){
+                            echo " <option value='". $fir_row['rat_name'] . "'>". $fir_row['rat_name']. "</option>";
+                        }
+                    ?>
+                </select>
 
-                <input type="text" id="srname" name="secondratname" placeholder="Second rat competitor's name..">
+                <input type="number" step="0.01" id="firstodds" name="firstodds" placeholder="First rat competitor's odds..">
 
-                <input type="number" step="0.01" id="srodds" name="secondratodds"
+                <select name="secondrat" id="secondrat" autocomplete="on" >
+                <option value="">-</option>
+                <?php 
+                    while($sec_row = mysqli_fetch_array($first_row)){
+                        echo " <option value='". $sec_row['rat_name'] . "'>". $sec_row['rat_name']. "</option>";
+                    }
+                ?>
+                </select>
+
+                <input type="number" step="0.01" id="secondratodds" name="secondratodds"
                     placeholder="Second rat competitor's odds..">
-
-                <input type="date">
-
-                <input type="time">
 
                 <input type="password" id="pass" name="password"
                     placeholder="Super admin password to confirm your match..">

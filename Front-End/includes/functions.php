@@ -64,8 +64,25 @@ function email_exists($email,$connection){
     $gender     = mysqli_real_escape_string($connection, $gender);
     $club       = mysqli_real_escape_string($connection, $club);
 
-    $query = "INSERT INTO rat (name, birthday, description, birth_place, gender, club)";
+    $query = "INSERT INTO rat (rat_name, birthday, description, birth_place, gender, club)";
     $query .= "VALUES('{$rat_name}', '{$birthday}', '{$description}', '{$birthPlace}', '{$gender}', '{$club}')";
+    $register_user_query = mysqli_query($connection, $query);
+    if(!$register_user_query ){
+        die("Query failed" . mysqli_error($connection));
+    }else{
+        header('Location: index.php');
+        exit();
+    }
+  }
+
+  function  addbet($connection,$firstrat,$secondrat,$firstodds,$secondodds){
+    $firstrat   = mysqli_real_escape_string($connection, $firstrat);
+    $secondrat   = mysqli_real_escape_string($connection, $secondrat);
+    $firstodds= mysqli_real_escape_string($connection, $firstodds);
+    $secondodds = mysqli_real_escape_string($connection, $secondodds);
+
+    $query = "INSERT INTO matches (first_rat, second_rat, first_odds,	second_odds)";
+    $query .= "VALUES('{$firstrat}', '{$secondrat}', '{$firstodds}', '{$secondodds}')";
     $register_user_query = mysqli_query($connection, $query);
     if(!$register_user_query ){
         die("Query failed" . mysqli_error($connection));

@@ -18,13 +18,7 @@
 </head>
 
 <body>
-    <?php 
-        if($connection){
-            echo "<h1 class='text-center'>Connected</h1>";
-        }else{
-            echo "<h1 class='text-center'>No connection</h1>";
-        }
-    ?>
+    
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
         <div class="sidebar-brand">
@@ -137,18 +131,28 @@
                                             <td style="padding-left: 30%;">2</td>
                                         </tr>
                                     </thead>
+
+                                    <?php  
+                                        $query = "SELECT * FROM matches";
+                                        $select_comment_query = mysqli_query($connection, $query);
+                                        if(!$select_comment_query){
+                                            die('QUERY FAILED' . mysqli_error($connection));
+                                        }
+                                    ?>
                                     <tbody>
                                         <tr>
-                                            <td><a href="ratProfile.html">Carmine</a> vs <a href="ratProfile.html">Mac
-                                                    Daddy</a></td>
-                                            <td><input class="largeBTN" type="button" id="firstButton" value="3.75"
-                                                    onclick="resetSecondButton()"></td>
-                                            <td><input class="largeBTN" type="button" id="secondButton" value="1.6"
-                                                    onclick="resetFirstButton()"></td>
+
+                                        <?php 
+                                            while($row = mysqli_fetch_array($select_comment_query)){
+                                                echo "<td><a href='ratProfile.php?name=".$row['first_rat']."'>". $row['first_rat']  ."</a> vs <a href='ratProfile.php?name=".$row['second_rat']."'>". $row['second_rat']  ."</a></td>";
+                                            
+                                            echo  "<td><input class='largeBTN' type='button' id='firstButton' value=". $row['first_odds']  . " onclick='resetSecondButton()'></td>";
+                                            echo  "<td><input class='largeBTN' type='button' id='secondButton' value=". $row['second_odds']  . " onclick='resetFirstButton()'></td>";
+                                        }
+                                        ?>
                                         </tr>
                                         <tr>
-                                            <td><a href="ratProfile.html">Einstein</a> vs <a
-                                                    href="ratProfile.html">Happy</a></td>
+                                            <td><a href="ratProfile.html">Einstein</a> vs <ahref="ratProfile.html">Happy</a></td>
                                             <td><input class="largeBTN" type="button" id="thirdButton" value="1.1"
                                                     onclick="resetForthButton()"></td>
                                             <td><input class="largeBTN" type="button" id="forthButton" value="6"

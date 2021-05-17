@@ -1,18 +1,34 @@
 <?php 
     include "includes/db_connection.php";
 
-    
-    $query = "SELECT * FROM rat WHERE id = 5";
-    $select_all_posts_query = mysqli_query($connection, $query);
-    $row = mysqli_fetch_assoc($select_all_posts_query);
+    $ratname;
+    $birthDate;
+    $description;
+    $last_five_matches;
+    $birthPlace;
+    $gender;
+    $club;
 
-    $ratname             = $row['name'];
-    $birthDate           = $row['birthday'];
-    $description         = $row['description'];
-    $last_five_matches	 = $row['last_five_matches'];
-    $birthPlace          = $row['birth_place'];
-    $gender              = $row['gender'];
-    $club                = $row['club'];
+    if(isset($_GET['name'])){ 
+
+        $name = $_GET['name'];
+        $query = "SELECT * FROM rat WHERE rat_name LIKE('$name')";
+        $select_all_posts_query = mysqli_query($connection, $query);
+        if(!$select_all_posts_query){
+            die("QUERY FAILED " . mysqli_error($connection));
+        }
+        $row = mysqli_fetch_assoc($select_all_posts_query);
+
+        $ratname             = $row['rat_name'];
+        $birthDate           = $row['birthday'];
+        $description         = $row['description'];
+        $last_five_matches	 = $row['last_five_matches'];
+        $birthPlace          = $row['birth_place'];
+        $gender              = $row['gender'];
+        $club                = $row['club'];
+
+        echo "<h1>HERE FIRST </h1>";
+    }
 ?>  
 
 <!DOCTYPE html>
