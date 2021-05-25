@@ -36,16 +36,16 @@
                 <li><a href="index.php" class="active"><span class="las la-igloo"></span>
                         <span>Dashboard</span></a>
                 </li>
-                <li><a href="user_profile.html"><span class="las la-users"></span>
+                <li><a href="user_profile.php"><span class="las la-users"></span>
                         <span>User Profile Settings</span></a>
                 </li>
-                <li><a href="your_bets.html"><span class="las la-clipboard-list"></span>
+                <li><a href="your_bets.php"><span class="las la-clipboard-list"></span>
                         <span>Your Bets</span></a>
                 </li>
-                <li><a href="ratProfile.html"><span class="las la-id-badge"></span>
+                <li><a href="ratProfile.php"><span class="las la-id-badge"></span>
                         <span>Rat Profile (For demo purposes)</span></a>
                 </li>
-                <li><a href="credit_card.html"><span class="las la-wallet"></span>
+                <li><a href="credit_card.php"><span class="las la-wallet"></span>
                         <span>Add Money</span></a>
                 </li>
                 <?php 

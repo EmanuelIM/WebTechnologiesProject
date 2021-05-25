@@ -45,27 +45,32 @@
 
         <div class="sidebar-menu">
             <ul>
-                <li><a href="index.html"><span class="las la-igloo"></span>
+            <li><a href="index.php"><span class="las la-igloo"></span>
                         <span>Dashboard</span></a>
                 </li>
-                <li><a href="user_profile.html"><span class="las la-users"></span>
+                <li><a href="user_profile.php"><span class="las la-users"></span>
                         <span>User Profile Settings</span></a>
                 </li>
-                <li><a href="your_bets.html"><span class="las la-clipboard-list"></span>
+                <li><a href="your_bets.php"><span class="las la-clipboard-list"></span>
                         <span>Your Bets</span></a>
                 </li>
-                <li><a href="create_bet.html" class="active"><span class="las la-caret-right"></span>
-                        <span>Add a match (SA Only)</span></a>
+                <li><a href="ratProfile.php"><span class="las la-id-badge"></span>
+                        <span>Rat Profile (For demo purposes)</span></a>
                 </li>
-                <li><a href="ratProfile.html"><span class="las la-id-badge"></span>
-                        <span>Rat Profile</span></a>
-                </li>
-                <li><a href="credit_card.html"><span class="las la-wallet"></span>
+                <li><a href="credit_card.php"><span class="las la-wallet"></span>
                         <span>Add Money</span></a>
                 </li>
-                <li><a href="add_rat.php"><span class="las la-id-badge"></span>
-                    <span>Add Rat</span></a>
-                </li>
+                <?php 
+                    if($_SESSION['role'] == 'admin'){
+                        echo " <li><a href='add_rat.php'><span class='las la-id-badge'></span>
+                        <span>Add Rat</span></a>
+                        </li>
+                        <li><a href='create_bet.php' class='active'><span class='las la-caret-right'></span>
+                                <span>Add a match (SA Only)</span></a>
+                        </li>";
+                    }
+                
+                ?>
             </ul>
         </div>
     </div>
@@ -80,8 +85,11 @@
             <div class="user-wrapper">
                 <img src="images/RatMan.png" width="30px" height="30px" alt="Rat profile picture">
                 <div>
-                    <h4>John Doe</h4>
-                    <small>Super Admin</small>
+                    <h4><?php echo $_SESSION['username'] ?></h4>
+                    <small><?php echo $_SESSION['role'] ?></small>
+                    <div class="sign-out-button">
+                        <a href="includes/logout.php"> Sign Out <span class="las la-arrow-right"></span></a>
+                    </div>
                 </div>
             </div>
         </header>

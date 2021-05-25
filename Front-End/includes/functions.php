@@ -1,5 +1,4 @@
 <?php 
-
 function register_user($connection,$username,$email,$password,$first_name,$second_name,$age,$country){
     $username   = mysqli_real_escape_string($connection, $username);
     $email      = mysqli_real_escape_string($connection, $email);
@@ -113,6 +112,7 @@ function email_exists($email,$connection){
           $db_user_role = $row['role'];
           $db_username = $row['nickname'];
           $db_user_password = $row['password'];
+          $id = $row['id'];
       }
 
       if(password_verify($password, $db_user_password)){
@@ -124,6 +124,35 @@ function email_exists($email,$connection){
         }else{
           header("Location: landing_page.html");
         }
+}
+
+function update_user($connection,$username,$email,$password,$first_name,$second_name,$username_update){
+    $username   = mysqli_real_escape_string($connection, $username);
+    $email      = mysqli_real_escape_string($connection, $email);
+    $password   = mysqli_real_escape_string($connection, $password);
+    $first_name  = mysqli_real_escape_string($connection, $first_name);
+    $second_name = mysqli_real_escape_string($connection, $second_name);
+    $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
+    $username_update = mysqli_real_escape_string($connection, $username_update);
+
+    $query = "UPDATE users SET ";
+    $query .= "first_name = '{$first_name}', ";
+    $query .= "second_name = '{$second_name}', ";
+    $query .= "email = '{$email}', ";
+    $query .= "password = '{$password}', ";
+    $query .= "nickname = '{$username}' ";
+    $query .= "WHERE nickname LIKE('{$username_update}')";
+
+    $update_user = mysqli_query($connection, $query);
+    if(!$update_user ){
+      die("Query failed" . mysqli_error($connection));
+    }else{
+      $_SESSION['username'] = $username;
+      $_SESSION['firstname'] = $first_name;
+      $_SESSION['lastname'] = $second_name;
+      header('Location: index.php');
+      exit();
+    }
 }
 
 ?>
