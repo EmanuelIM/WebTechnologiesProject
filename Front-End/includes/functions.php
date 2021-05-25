@@ -93,6 +93,20 @@ function email_exists($email,$connection){
     }
   }
 
+  function  addmoney($connection,$nickname,$money){
+    $nickname = mysqli_real_escape_string($connection, $nickname);
+    $money = mysqli_real_escape_string($connection, $money);
+
+    $query = "UPDATE users SET money = money + '{$money}' WHERE nickname = '{$nickname}'"; 
+    $register_user_query = mysqli_query($connection, $query);
+    if(!$register_user_query ){
+        die("Query failed" . mysqli_error($connection));
+    }else{
+        header('Location: index.php');
+        exit();
+    }
+  }
+
   function login_user($username, $password,$connection){
      
       $username = trim($username);

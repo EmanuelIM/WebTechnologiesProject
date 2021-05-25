@@ -90,7 +90,16 @@
             <div class="cards">
                 <div class="card-single">
                     <div>
-                        <h1>6</h1>
+                        <h1>
+                        <?php
+                        date_default_timezone_set('Europe/Bucharest');
+                        $date = date('Y-m-d');
+                        $query = "SELECT * FROM matches WHERE date = '$date'";
+                                        $select_comment_query = mysqli_query($connection, $query);
+                        
+                        echo mysqli_num_rows($select_comment_query);
+                        ?>
+                    </h1>
                         <span>Matches Today</span>
                     </div>
                     <div>
@@ -99,7 +108,28 @@
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>2</h1>
+                        <h1>
+                        
+                        <?php
+                        date_default_timezone_set('Europe/Bucharest');
+                        $date = date('Y-m-d');
+                        $current_time = date("H:i:s");
+                        
+                        $query = "SELECT time FROM matches";
+                        $select_comment_query = mysqli_query($connection, $query);
+                        $matches_ongoing = 0;
+                        while($row = mysqli_fetch_array($select_comment_query)){
+                            $time = $row['time'];
+                            $match_time = date("H:i:s",strtotime($time));
+                            $match_end_time = date("H:i:s",strtotime($match_time . " + 15 minutes"));
+                            if($current_time >= $match_time && $current_time <= $match_end_time){
+                                $matches_ongoing += 1;
+                            }
+                        }
+
+                        echo $matches_ongoing;
+                    ?>
+                    </h1>
                         <span>Ongoing matches</span>
                     </div>
                     <div>
@@ -117,7 +147,18 @@
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>$17.01</h1>
+                    
+                        <h1>
+                        <?php
+                        $query = "SELECT money FROM users WHERE nickname = '".$_SESSION['username']."'";
+                        $select_comment_query = mysqli_query($connection, $query);
+                        $money = 0;
+                        while($row = mysqli_fetch_array($select_comment_query)){
+                            $money = $row['money'];
+                        }
+
+                        echo $money;
+                    ?>$</h1>
                         <span>Your current balance</span>
                     </div>
                     <div>
@@ -155,16 +196,16 @@
                                     <tbody>
 
                                         <?php 
-                                        date_default_timezone_set('Europe/Bucharest');
-                                        $date = date('Y-m-d');
+                                        $button_number = 0;
                                             while($row = mysqli_fetch_array($select_comment_query)){
                                                 if($row['date'] == $date){
                                                 echo "<tr>";
                                                 echo "<td><a href='ratProfile.php?name=".$row['first_rat']."'>". $row['first_rat']  ."</a> vs <a href='ratProfile.php?name=".$row['second_rat']."'>". $row['second_rat']  ."</a></td>";
                                                 
-                                            
-                                            echo  "<td><input class='largeBTN' type='button' id='firstButton' value=". $row['first_odds']  . " onclick='resetSecondButton()'></td>";
-                                            echo  "<td><input class='largeBTN' type='button' id='secondButton' value=". $row['second_odds']  . " onclick='resetFirstButton()'></td>";
+                                            $button_number +=1;
+                                            echo  "<td><input class='largeBTN' type='button' id='button".$button_number."' value=". $row['first_odds']  . " onclick='resetButton2(".$button_number.")'></td>";
+                                            $button_number +=1;
+                                            echo  "<td><input class='largeBTN' type='button' id='button".$button_number."' value=". $row['second_odds']  . " onclick='resetButton1(".$button_number.")'></td>";
                                             echo "<td>".$row['time']."</td>";
                                             
                                             echo "</tr>";

@@ -1,4 +1,18 @@
-<?php  session_start();?>
+<?php 
+
+    include "includes/db_connection.php";
+    include "includes/functions.php";
+
+    session_start();
+
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
+        $nickname      = $_SESSION['username'];
+        $money         = trim($_POST['money_added']);
+
+
+        addmoney($connection,$nickname,$money);
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -75,15 +89,19 @@
         </header>
         <div class="col">
             <div class="container">
-                <form>
+                <form method="post">
                     <label for="nameoncard">Name on Card</label>
-                    <input type="text" id="nameoncard" name="nameoncard" placeholder="John D. Doe">
+                    <input type="text" id="nameoncard" name="nameoncard" placeholder="John D. Doe" required="required">
                     <label for="cardnumber">Credit card number</label>
-                    <input type="text" id="cardnumber" name="cardnumber" placeholder="XXXX-XXXX-XXXX-XXXX">
+                    <!-- Visa, MasterCard, American Express, Diners Club, Discover, and JCB cards: -->
+                    <!-- Sample card: 4988438843884305 -->
+                    <input type="text" id="cardnumber" name="cardnumber" placeholder="XXXX-XXXX-XXXX-XXXX" required="required" pattern = "^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$">
                     <label for="expdate">Expiration Date</label>
-                    <input type="month" id="expdate" name="expdate">
+                    <input type="month" id="expdate" name="expdate" required="required">
                     <label for="cvv">CVV</label>
-                    <input type="text" id="cvv" name="cvv" placeholder="XXX">
+                    <input type="text" id="cvv" name="cvv" placeholder="XXX" required="required" pattern = "^[0-9]{3, 4}$">
+                    <label for="money_added">Amount you want to add</label>
+                    <input type="number" step="0.01" id="money_added" name="money_added" placeholder="$$$" required="required">
                     <input type="submit" value="Show me the money" class="btn">
                 </form>
             </div>
