@@ -1,5 +1,7 @@
 <?php 
+	session_start();
 	include "includes/db_connection.php";
+	include "includes/functions.php";
 
 	if($_SERVER['REQUEST_METHOD'] == "POST"){
 		$username    = trim($_POST['username']);
@@ -13,7 +15,7 @@
 		$username = mysqli_real_escape_string($connection, $username);
       	$password = mysqli_real_escape_string($connection, $password);
 
-		$query = "SELECT password FROM users WHERE nickname = '{$username}'";
+		$query = "SELECT password,role FROM users WHERE nickname = '{$username}'";
 		$select_user_query = mysqli_query($connection, $query);
 
 		if(!$select_user_query){
@@ -37,7 +39,7 @@
 		 }
 
 		if(empty($error)){
-			header('Location: index.php');
+			login_user($username,$password,$connection);
 			exit();
 		}
 

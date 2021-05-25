@@ -8,17 +8,17 @@ function register_user($connection,$username,$email,$password,$first_name,$secon
     $second_name = mysqli_real_escape_string($connection, $second_name);
     $age  = mysqli_real_escape_string($connection, $age);
     $country = mysqli_real_escape_string($connection, $country);
-
+    $tmp_pass = $password;
     $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
 
-    $query = "INSERT INTO users (first_name, second_name, country, email, password, age, nickname)";
-    $query .= "VALUES('{$first_name}', '{$second_name}', '{$country}', '{$email}', '{$password}', '{$age}', '{$username}')";
+    $query = "INSERT INTO users (first_name, second_name, country, email, password, age, nickname,role)";
+    $query .= "VALUES('{$first_name}', '{$second_name}', '{$country}', '{$email}', '{$password}', '{$age}', '{$username}','user')";
     $register_user_query = mysqli_query($connection, $query);
 
     if(!$register_user_query ){
         die("Query failed" . mysqli_error($connection));
     }else{
-        header('Location: index.php');
+        login_user($username,$tmp_pass,$connection);
         exit();
     }
 }
@@ -91,5 +91,39 @@ function email_exists($email,$connection){
         exit();
     }
   }
+
+  function login_user($username, $password,$connection){
+     
+      $username = trim($username);
+      $password = trim($password);
+         
+         
+      $username = mysqli_real_escape_string($connection, $username);
+      $password = mysqli_real_escape_string($connection, $password);
+         
+         $query = "SELECT * FROM users WHERE nickname = '{$username}'";
+         $select_user_query = mysqli_query($connection, $query);
+         if(!$select_user_query){
+             die ("Query failed " . mysqli_error($connection));
+         }
+
+      while($row = mysqli_fetch_array($select_user_query)){
+          $db_user_firstname= $row['first_name'];
+          $db_user_lastname = $row['second_name'];
+          $db_user_role = $row['role'];
+          $db_username = $row['nickname'];
+          $db_user_password = $row['password'];
+      }
+
+      if(password_verify($password, $db_user_password)){
+          $_SESSION['username'] = $db_username;
+          $_SESSION['firstname'] = $db_user_firstname;
+          $_SESSION['lastname'] = $db_user_lastname;
+          $_SESSION['role'] = $db_user_role;
+          header("Location: index.php");
+        }else{
+          header("Location: landing_page.html");
+        }
+}
 
 ?>

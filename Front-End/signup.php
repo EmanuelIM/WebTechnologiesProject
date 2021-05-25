@@ -1,6 +1,7 @@
 <?php 
 	include "includes/db_connection.php";
 	include "includes/functions.php";
+	session_start();
 
 	if($_SERVER['REQUEST_METHOD'] == "POST"){
 		$username    = trim($_POST['username']);

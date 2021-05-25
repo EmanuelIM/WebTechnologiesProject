@@ -1,5 +1,10 @@
 <?php 
     include "includes/db_connection.php";
+    session_start();
+
+    if(!isset($_SESSION['username'])){
+        header("Location: landing_page.html");
+    }
 ?>
 
 
@@ -37,18 +42,23 @@
                 <li><a href="your_bets.html"><span class="las la-clipboard-list"></span>
                         <span>Your Bets</span></a>
                 </li>
-                <li><a href="create_bet.html"><span class="las la-caret-right"></span>
-                        <span>Add a match (SA Only)</span></a>
-                </li>
                 <li><a href="ratProfile.html"><span class="las la-id-badge"></span>
                         <span>Rat Profile (For demo purposes)</span></a>
                 </li>
                 <li><a href="credit_card.html"><span class="las la-wallet"></span>
                         <span>Add Money</span></a>
                 </li>
-                <li><a href="add_rat.php"><span class="las la-id-badge"></span>
+                <?php 
+                    if($_SESSION['role'] == 'admin'){
+                        echo " <li><a href='add_rat.php'><span class='las la-id-badge'></span>
                         <span>Add Rat</span></a>
-                </li>
+                        </li>
+                        <li><a href='create_bet.php'><span class='las la-caret-right'></span>
+                                <span>Add a match (SA Only)</span></a>
+                        </li>";
+                    }
+                
+                ?>
             </ul>
         </div>
     </div>
@@ -68,10 +78,10 @@
             <div class="user-wrapper">
                 <img src="images/RatMan.png" width="30px" height="30px" alt="">
                 <div>
-                    <h4>John Doe</h4>
-                    <small>Super Admin</small>
+                    <h4><?php echo $_SESSION['username'] ?></h4>
+                    <small><?php echo $_SESSION['role'] ?></small>
                     <div class="sign-out-button">
-                        <a href="landing_page.html"> Sign Out <span class="las la-arrow-right"></span></a>
+                        <a href="includes/logout.php"> Sign Out <span class="las la-arrow-right"></span></a>
                     </div>
                 </div>
             </div>

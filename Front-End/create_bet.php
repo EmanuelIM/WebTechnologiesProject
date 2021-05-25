@@ -3,6 +3,14 @@
     include "includes/db_connection.php";
     include "includes/functions.php";
 
+    session_start();
+
+    if(isset($_SESSION['role']) && $_SESSION['role'] != 'admin'){
+        header("Location: index.php");
+    }else if(!isset($_SESSION['role']) && $_SESSION['role'] != 'admin'){
+            header("Location: landing_page.html");
+    }
+
     if($_SERVER['REQUEST_METHOD'] == "POST"){
         $firstrat     = trim($_POST['firstrat']);
         $secondrat    = trim($_POST['secondrat']);
