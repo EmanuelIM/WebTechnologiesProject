@@ -45,7 +45,7 @@ function email_exists($email,$connection){
   }
   
   function rat_exists($rat_name,$connection){
-    $query = "SELECT name FROM rat WHERE name = '$rat_name'";
+    $query = "SELECT rat_name FROM rat WHERE rat_name = '$rat_name'";
     $result = mysqli_query($connection, $query);
   
     if(mysqli_num_rows($result) > 0){
@@ -74,14 +74,16 @@ function email_exists($email,$connection){
     }
   }
 
-  function  addbet($connection,$firstrat,$secondrat,$firstodds,$secondodds){
+  function  addbet($connection,$firstrat,$secondrat,$firstodds,$secondodds,$date,$time){
     $firstrat   = mysqli_real_escape_string($connection, $firstrat);
     $secondrat   = mysqli_real_escape_string($connection, $secondrat);
     $firstodds= mysqli_real_escape_string($connection, $firstodds);
     $secondodds = mysqli_real_escape_string($connection, $secondodds);
+    $date = mysqli_real_escape_string($connection, $date);
+    $time = mysqli_real_escape_string($connection, $time);
 
-    $query = "INSERT INTO matches (first_rat, second_rat, first_odds,	second_odds)";
-    $query .= "VALUES('{$firstrat}', '{$secondrat}', '{$firstodds}', '{$secondodds}')";
+    $query = "INSERT INTO matches (first_rat, second_rat, first_odds,	second_odds, date, time)";
+    $query .= "VALUES('{$firstrat}', '{$secondrat}', '{$firstodds}', '{$secondodds}', '{$date}', '{$time}')";
     $register_user_query = mysqli_query($connection, $query);
     if(!$register_user_query ){
         die("Query failed" . mysqli_error($connection));

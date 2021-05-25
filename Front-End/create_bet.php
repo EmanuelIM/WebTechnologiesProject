@@ -16,9 +16,11 @@
         $secondrat    = trim($_POST['secondrat']);
         $firstodds    = trim($_POST['firstodds']);
         $secondodds   = trim($_POST['secondratodds']);
+        $date         = trim($_POST['matchDate']);
+        $time         = trim($_POST['matchTime']);
 
 
-        addbet($connection,$firstrat,$secondrat,$firstodds,$secondodds);
+        addbet($connection,$firstrat,$secondrat,$firstodds,$secondodds,$date,$time);
     }
 ?>
 
@@ -128,8 +130,15 @@
                 ?>
                 </select>
 
+
                 <input type="number" step="0.01" id="secondratodds" name="secondratodds"
                     placeholder="Second rat competitor's odds..">
+
+                <label for="matchDate">Match Date </label>
+                <input type="date" id="matchDate" name="matchDate" placeholder="">
+
+                <label for="matchTime">Match Hour </label>
+                <input type="time" id="matchTime" name="matchTime" placeholder="">
 
                 <input type="password" id="pass" name="password"
                     placeholder="Super admin password to confirm your match..">
