@@ -127,11 +127,11 @@
             </div>
             <div class="recent-grid">
                 <div class="projects">
-                <a href="past_matches.php" class="button button1"> Past Matches</a>
+                <a href="index.php" class="button button3"> Today's Matches</a>
                 <a href="future_matches.php" class="button button2"> Future Matches</a>
                     <div class="card">
                         <div class="card-header">
-                            <h3>Today's Matches</h3>
+                            <h3>All Past Matches</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -139,9 +139,9 @@
                                     <thead>
                                         <tr>
                                             <td>Match</td>
-                                            <td style="padding-left:6%;">1</td>
-                                            <td style="padding-left: 6%;">2</td>
-                                            <td style="padding-left: 10%;">Time</td>
+                                            <td style="padding-left: 3%">Date</td>
+                                            <td style="padding-left: 2%;">Time</td>
+                                            <td style="">Winner</td>
                                         </tr>
                                     </thead>
 
@@ -158,15 +158,13 @@
                                         date_default_timezone_set('Europe/Bucharest');
                                         $date = date('Y-m-d');
                                             while($row = mysqli_fetch_array($select_comment_query)){
-                                                if($row['date'] == $date){
+                                                if($row['date'] < $date){
                                                 echo "<tr>";
                                                 echo "<td><a href='ratProfile.php?name=".$row['first_rat']."'>". $row['first_rat']  ."</a> vs <a href='ratProfile.php?name=".$row['second_rat']."'>". $row['second_rat']  ."</a></td>";
-                                                
-                                            
-                                            echo  "<td><input class='largeBTN' type='button' id='firstButton' value=". $row['first_odds']  . " onclick='resetSecondButton()'></td>";
-                                            echo  "<td><input class='largeBTN' type='button' id='secondButton' value=". $row['second_odds']  . " onclick='resetFirstButton()'></td>";
+                                               
+                                            echo "<td>".$row['date']."</td>";
                                             echo "<td>".$row['time']."</td>";
-                                            
+                                            echo "<td>Ionut</td>";
                                             echo "</tr>";
                                             }
                                         }
@@ -178,53 +176,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="customers">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Your ticket</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="customer">
-                                <div class="info">
-                                    <h2>Total elevation</h2>
-                                </div>
-                                <div class="contact">
-                                    <h2>Total matches</h2>
-                                </div>
-                            </div>
-                            <div class="customer">
-                                <div class="info">
-                                    <input class="borderOnClick" type="text" id="elev" value="0"
-                                        style="text-align: center;"></input>
-                                </div>
-                                <div class="contact">
-                                    <input class="borderOnClick" type="text" id="inc" value="0"
-                                        style="text-align: center;"></input>
-                                </div>
-                            </div>
-                            <div>
-                                <h2 class="ammount">What are you willing to pay?</h2>
-                                <div>
-                                    <input class="borderOnClick alignBtn" type="number" id="ticketValue"
-                                        placeholder="Enter how much money do you want to bet...">
-                                </div>
-                            </div>
-                            <div style="padding-top: 10px;">
-                                <input class="placeBet" type="button" onclick="calculateMoney()"
-                                    value="Calculate how much you will make">
-                            </div>
-                            <div>
-                                <h2 class="ammount">If everything goes your way, you will make..</h2>
-                                <div>
-                                    <input class="borderOnClick alignBtn" id="totalMoney" value="0">
-                                </div>
-                            </div>
-                            <div>
-                                <h2 class="ammount">Place your bet if you are happy with your rats!!</h2>
-                                <button class="placeBet">Place your bet!!</button>
-                            </div>
-                        </div>
-                    </div>
+                
                 </div>
             </div>
         </main>

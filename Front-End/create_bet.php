@@ -24,9 +24,27 @@
     }
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
+<script type="text/javascript"> 
+  function getselected(){ 
+    var select_container = document.getElementById('firstrat'); 
+	alert('type: '+select_container); 
+	alert('type: '+ select_container.options[select_container.selectedIndex].value); 
+    alert('checking'); 
+  }
+</script>
+<script type="text/javascript"> 
+  function getselected1(){ 
+    var select_container1 = document.getElementById('secondrat'); 
+	alert('type: '+select_container1); 
+	alert('type: '+ select_container1.options[select_container1.selectedIndex].value); 
+    alert('checking'); 
+  }
+</script>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -110,7 +128,8 @@
                     }
                 ?>
 
-                <select name="firstrat" id="firstrat" autocomplete="on" >
+                <label for="firstrat"> First Rat's Name </label>
+                <select name="firstrat" id="firstrat" autocomplete="on">
                     <option value="">-</option>
                     <?php 
                         while($fir_row = mysqli_fetch_array($select_comment_query)){
@@ -119,9 +138,11 @@
                     ?>
                 </select>
 
-                <input type="number" step="0.01" id="firstodds" name="firstodds" placeholder="First rat competitor's odds..">
+                <label for="firstodds"> First Rat's Odds </label>
+                <input type="number" step="0.01" id="firstodds" name="firstodds" placeholder="Odds..">
 
-                <select name="secondrat" id="secondrat" autocomplete="on" >
+                <label for="secondrat"> Second Rat's Name </label>
+                <select name="secondrat" id="secondrat" autocomplete="on">
                 <option value="">-</option>
                 <?php 
                     while($sec_row = mysqli_fetch_array($first_row)){
@@ -130,9 +151,9 @@
                 ?>
                 </select>
 
-
+                <label for="secondratodds"> Second Rat's Odds </label>
                 <input type="number" step="0.01" id="secondratodds" name="secondratodds"
-                    placeholder="Second rat competitor's odds..">
+                    placeholder="Odds..">
 
                 <label for="matchDate">Match Date </label>
                 <input type="date" id="matchDate" name="matchDate" placeholder="">

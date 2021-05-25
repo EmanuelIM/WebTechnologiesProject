@@ -132,6 +132,7 @@
                     <input type="text" id="birthPlace" name="birthPlace" placeholder="Paris">
                     <label for="description">Short Description</label>
                     <input type="text" id="description" name="description">
+                    <label for="gender">Gender</label>
                     <select name="gender" id="gender" autocomplete="on" >
                         <option value="">-</option>
                         <option value="M">M</option>

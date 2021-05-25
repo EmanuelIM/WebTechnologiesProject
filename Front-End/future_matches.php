@@ -128,10 +128,10 @@
             <div class="recent-grid">
                 <div class="projects">
                 <a href="past_matches.php" class="button button1"> Past Matches</a>
-                <a href="future_matches.php" class="button button2"> Future Matches</a>
+                <a href="index.php" class="button button3"> Today's Matches</a>
                     <div class="card">
                         <div class="card-header">
-                            <h3>Today's Matches</h3>
+                            <h3>All Future Matches</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -139,8 +139,9 @@
                                     <thead>
                                         <tr>
                                             <td>Match</td>
-                                            <td style="padding-left:6%;">1</td>
-                                            <td style="padding-left: 6%;">2</td>
+                                            <td style="padding-left:4%;">1</td>
+                                            <td style="padding-left: 4%;">2</td>
+                                            <td style="padding-left: 3%">Date</td>
                                             <td style="padding-left: 10%;">Time</td>
                                         </tr>
                                     </thead>
@@ -158,13 +159,14 @@
                                         date_default_timezone_set('Europe/Bucharest');
                                         $date = date('Y-m-d');
                                             while($row = mysqli_fetch_array($select_comment_query)){
-                                                if($row['date'] == $date){
+                                                if($row['date'] > $date){
                                                 echo "<tr>";
                                                 echo "<td><a href='ratProfile.php?name=".$row['first_rat']."'>". $row['first_rat']  ."</a> vs <a href='ratProfile.php?name=".$row['second_rat']."'>". $row['second_rat']  ."</a></td>";
                                                 
                                             
-                                            echo  "<td><input class='largeBTN' type='button' id='firstButton' value=". $row['first_odds']  . " onclick='resetSecondButton()'></td>";
-                                            echo  "<td><input class='largeBTN' type='button' id='secondButton' value=". $row['second_odds']  . " onclick='resetFirstButton()'></td>";
+                                            echo "<td><input class='largeBTN' type='button' id='firstButton' value=". $row['first_odds']  . " onclick='resetSecondButton()'></td>";
+                                            echo "<td><input class='largeBTN' type='button' id='secondButton' value=". $row['second_odds']  . " onclick='resetFirstButton()'></td>";
+                                            echo "<td>".$row['date']."</td>";
                                             echo "<td>".$row['time']."</td>";
                                             
                                             echo "</tr>";
