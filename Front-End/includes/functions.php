@@ -1,17 +1,18 @@
 <?php 
-function register_user($connection,$username,$email,$password,$first_name,$second_name,$age,$country){
+function register_user($connection,$username,$email,$password,$first_name,$second_name,$age,$country,$avatar_link){
     $username   = mysqli_real_escape_string($connection, $username);
     $email      = mysqli_real_escape_string($connection, $email);
     $password   = mysqli_real_escape_string($connection, $password);
     $first_name  = mysqli_real_escape_string($connection, $first_name);
     $second_name = mysqli_real_escape_string($connection, $second_name);
     $age  = mysqli_real_escape_string($connection, $age);
+    $avatar_link = mysqli_real_escape_string($connection,$avatar_link);
     $country = mysqli_real_escape_string($connection, $country);
     $tmp_pass = $password;
     $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
 
-    $query = "INSERT INTO users (first_name, second_name, country, email, password, age, nickname,role)";
-    $query .= "VALUES('{$first_name}', '{$second_name}', '{$country}', '{$email}', '{$password}', '{$age}', '{$username}','user')";
+    $query = "INSERT INTO users (first_name, second_name, country, email, password, age, nickname,role,avatar_link)";
+    $query .= "VALUES('{$first_name}', '{$second_name}', '{$country}', '{$email}', '{$password}', '{$age}', '{$username}','user','{$avatar_link}')";
     $register_user_query = mysqli_query($connection, $query);
 
     if(!$register_user_query ){
@@ -128,7 +129,7 @@ function email_exists($email,$connection){
           $db_user_role = $row['role'];
           $db_username = $row['nickname'];
           $db_user_password = $row['password'];
-          $id = $row['id'];
+          $avatar_link = $row['avatar_link'];
       }
 
       if(password_verify($password, $db_user_password)){
@@ -136,13 +137,14 @@ function email_exists($email,$connection){
           $_SESSION['firstname'] = $db_user_firstname;
           $_SESSION['lastname'] = $db_user_lastname;
           $_SESSION['role'] = $db_user_role;
+          $_SESSION['avatar_link'] = $avatar_link;
           header("Location: index.php");
         }else{
           header("Location: landing_page.html");
         }
 }
 
-function update_user($connection,$username,$email,$password,$first_name,$second_name,$username_update){
+function update_user($connection,$username,$email,$password,$first_name,$second_name,$username_update,$avatar_link){
     $username   = mysqli_real_escape_string($connection, $username);
     $email      = mysqli_real_escape_string($connection, $email);
     $password   = mysqli_real_escape_string($connection, $password);
@@ -150,6 +152,7 @@ function update_user($connection,$username,$email,$password,$first_name,$second_
     $second_name = mysqli_real_escape_string($connection, $second_name);
     $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
     $username_update = mysqli_real_escape_string($connection, $username_update);
+    $avatar_link = mysqli_real_escape_string($connection,$avatar_link);
 
     $query = "UPDATE users SET ";
     $query .= "first_name = '{$first_name}', ";
@@ -157,6 +160,7 @@ function update_user($connection,$username,$email,$password,$first_name,$second_
     $query .= "email = '{$email}', ";
     $query .= "password = '{$password}', ";
     $query .= "nickname = '{$username}' ";
+    $query .= "avatar_link = '{$avatar_link}' ";
     $query .= "WHERE nickname LIKE('{$username_update}')";
 
     $update_user = mysqli_query($connection, $query);
@@ -166,6 +170,7 @@ function update_user($connection,$username,$email,$password,$first_name,$second_
       $_SESSION['username'] = $username;
       $_SESSION['firstname'] = $first_name;
       $_SESSION['lastname'] = $second_name;
+      $_SESSION['avatar_link'] = $avatar_link;
       header('Location: index.php');
       exit();
     }

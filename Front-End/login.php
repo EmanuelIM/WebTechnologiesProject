@@ -109,7 +109,7 @@
 				</div>
 				<?php  if(isset($error['password'])){
 					echo "<div>
-							<p class='btn' style=' padding: 10px 0px'>". $error['password']. "</p>
+							<p style='height:4vh;border-radius:1vh; background-color:red; text-align:center; padding-top:1vh;'>". $error['password']. "</p>
 						 </div>";
 				}
 				?>

@@ -11,6 +11,7 @@
 		$country   = trim($_POST['country']); 
 		$first_name  = trim($_POST['first_name']); 
 		$second_name = trim($_POST['second_name']);
+		$avatar_link = trim($_POST['avatar_link']);
 
 		$error = [
 			'username' => '',
@@ -50,7 +51,7 @@
 		 }
 
 		 if(empty($error)){
-			register_user($connection,$username,$email,$password,$first_name,$second_name,$age,$country);
+			register_user($connection,$username,$email,$password,$first_name,$second_name,$age,$country,$avatar_link);
 		}
 	}
 ?>
@@ -90,7 +91,7 @@
 			<img src="images/rats.png">
 		</div>
 		<div class="login-content">
-			<form action="" method="post" id="login-form" autocomplete="off">
+			<form  style="height:700px; overflow-y:auto;" action="" method="post" id="login-form" autocomplete="off">
 				<h2 class="title">NEW HERE?</h2>
 				<div class="input-div one">
 					<div class="i">
@@ -115,13 +116,22 @@
 						<i class="fas fa-user"></i>
 					</div>
 					<div class="div">
+						<h5>Avatar Link</h5>
+						<input type="text" class="input" name="avatar_link" id="avatar_link" autocomplete="on">
+					</div>
+				</div>
+				<div class="input-div one">
+					<div class="i">
+						<i class="fas fa-user"></i>
+					</div>
+					<div class="div">
 						<h5>Username</h5>
 						<input type="text" class="input" name="username" id="username" autocomplete="on" >
 					</div>
 				</div>
 				<?php  if(isset($error['username'])){
-					echo "<div>
-							<p class='btn' style=' padding: 10px 0px'>". $error['username']. "</p>
+					echo "<div >
+							<p  style='height:4vh;border-radius:1vh; background-color:red; text-align:center; padding-top:1vh;'>". $error['username']. "</p>
 						 </div>";
 				}?>
 				<div class="input-div one">
@@ -393,7 +403,7 @@
 				</div>
 				<?php  if(isset($error['email'])){
 					echo "<div>
-							<p class='btn' style=' padding: 10px 0px'>". $error['email']. "</p>
+							<p style='height:4vh;border-radius:1vh; background-color:red; text-align:center; padding-top:1vh;'>". $error['email']. "</p>
 						 </div>";
 				}
 				?>
@@ -407,8 +417,8 @@
                     </div>
 				</div>
 				<?php  if(isset($error['password'])){
-					echo "<div>
-							<p class='btn' style=' padding: 10px 0px'>". $error['password']. "</p>
+					echo "<br><div>
+							<p style='height:4vh;border-radius:1vh; background-color:red; text-align:center; padding-top:1vh;'>". $error['password']. "</p>
 						 </div>";
 				}
 				?>

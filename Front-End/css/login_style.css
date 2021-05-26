@@ -11,12 +11,10 @@ body {
 	overflow: hidden;
 }
 
-.wave {
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	height: 100%;
-	z-index: -1;
+.error{
+	border-radius:1vh;
+	background-color:red; 
+	text-align:center;
 }
 
 .container {

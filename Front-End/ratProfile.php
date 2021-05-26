@@ -94,7 +94,9 @@
                 Rat Profile
             </h2>
             <div class="user-wrapper">
-                <img src="images/RatMan.png" width="30px" height="30px" alt="">
+                 <?php
+                    echo "<img src='" . $_SESSION['avatar_link'] . "' width='30px' height='30px' alt='no'>";
+                ?>
                 <div>
                     <h4><?php echo $_SESSION['username'] ?></h4>
                     <small><?php echo $_SESSION['role'] ?></small>

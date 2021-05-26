@@ -12,8 +12,9 @@ $row = mysqli_fetch_assoc($select_user_query);
 $username            = $row['nickname'];
 $first_name          = $row['first_name'];
 $second_name         = $row['second_name'];
-$email                 = $row['email'];
+$email               = $row['email'];
 $password            = $row['password'];
+$avatar_link         = $row['avatar_link'];
 
 
 
@@ -24,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $new_second_name = trim($_POST['lastname']);
     $new_password = trim($_POST['new_password']);
     $new_password_r = trim($_POST['new_password_r']);
+    $new_link       = trim($_POST['avatar_link']);
 
     $error = [
         'username' => '',
@@ -75,11 +77,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if ($second_name != $new_second_name) {
             $second_name = $new_second_name;
         }
+        if($avatar_link != $new_link){
+            $avatar_link = $new_link;
+        }
         if (!password_verify($new_password, $password) && $new_password != '') {
             $password = $new_password;
         }
 
-        update_user($connection, $username, $email, $password, $first_name, $second_name, $_SESSION['username']);
+        update_user($connection, $username, $email, $password, $first_name, $second_name, $_SESSION['username'],$avatar_link);
     }
 }
 ?>
@@ -144,13 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </h2>
             <div class="user-wrapper">
                 <?php
-                $query = "SELECT avatar_link FROM users WHERE nickname = '" . $_SESSION['username'] . "'";
-                $select_comment_query = mysqli_query($connection, $query);
-                while ($row = mysqli_fetch_array($select_comment_query)) {
-                    $link = $row['avatar_link'];
-                }
-
-                echo "<img src='" . $link . "' width='30px' height='30px' alt='no'>";
+                    echo "<img src='" . $_SESSION['avatar_link'] . "' width='30px' height='30px' alt='no'>";
                 ?>
                 <div>
 
@@ -164,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </header>
         <main>
         <?php
-                echo "<img src='" . $link . "' width='100px' height='auto' alt='' style='float:left; align-items: center; border: 5px solid #555';>";
+                echo "<img src='" . $_SESSION['avatar_link'] . "' width='100px' height='auto' alt='' style='float:left; align-items: center; border: 5px solid #555';>";
                 ?>
             <h2>Hello, <?php echo $_SESSION['username'] ?>! (<?php echo $_SESSION['role'] ?>!)</h2>
             <br><br>
@@ -177,6 +176,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <input type="text" id="lname" name="lastname" value="<?php echo $second_name ?>">
                 <label for="username">Username</label>
                 <input type="link" id="username" name="username" value="<?php echo $username ?>">
+                <label for="avatar_link">Avatar Link</label>
+                <input type="link" id="avatar_link" name="avatar_link" value="<?php echo $avatar_link ?>">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" value="<?php echo $email ?>">
                 <label for="photo">Photo Link</label>
