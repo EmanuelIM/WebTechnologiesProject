@@ -180,8 +180,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <input type="link" id="avatar_link" name="avatar_link" value="<?php echo $avatar_link ?>">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" value="<?php echo $email ?>">
-                <label for="photo">Photo Link</label>
-                <input type="link" id="photo" name="photo" placeholder="New avatar link..">
                 <label for="new_password">New Password</label>
                 <input type="password" id="new_password" name="new_password" placeholder="New password..">
                 <label for="new_password_r">Repeat New Password</label>

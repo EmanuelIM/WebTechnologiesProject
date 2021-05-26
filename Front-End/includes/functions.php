@@ -159,7 +159,7 @@ function update_user($connection,$username,$email,$password,$first_name,$second_
     $query .= "second_name = '{$second_name}', ";
     $query .= "email = '{$email}', ";
     $query .= "password = '{$password}', ";
-    $query .= "nickname = '{$username}' ";
+    $query .= "nickname = '{$username}', ";
     $query .= "avatar_link = '{$avatar_link}' ";
     $query .= "WHERE nickname LIKE('{$username_update}')";
 
