@@ -10,6 +10,8 @@ input, select {
     font-size: 20px;
 }
 
+
+
 input:focus {
     transition-duration: 0.8s;
     background-color: #f1a10c;
@@ -242,6 +244,7 @@ main {
     background: #fff;
     border-radius: 5px;
 }
+
 
 .card-header, .card-body {
     padding: 1rem;

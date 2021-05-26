@@ -95,7 +95,7 @@
                         date_default_timezone_set('Europe/Bucharest');
                         $date = date('Y-m-d');
                         $query = "SELECT * FROM matches WHERE date = '$date'";
-                                        $select_comment_query = mysqli_query($connection, $query);
+                        $select_comment_query = mysqli_query($connection, $query);
                         
                         echo mysqli_num_rows($select_comment_query);
                         ?>

@@ -19,8 +19,30 @@
         $date         = trim($_POST['matchDate']);
         $time         = trim($_POST['matchTime']);
 
+        $error = [
+			'ratname' => '',
+            'firstrat' =>'',
+            'secondrat' =>''
+		 ];
 
-        addbet($connection,$firstrat,$secondrat,$firstodds,$secondodds,$date,$time);
+         if($firstrat == $secondrat){
+             $error['ratname'] = 'Rats must be should be different';
+         }
+         if($firstrat == '-'){
+             $error['firstrat'] = 'You should choose one rat';
+         }
+         if($secondrat == '-'){
+             $error['secondrat'] = 'You should choose one rat';
+         }
+         foreach ($error as $key => $value) {
+			if(empty($value)){
+				unset($error[$key]);
+			}
+		 }
+
+         if(empty($error)){
+            addbet($connection,$firstrat,$secondrat,$firstodds,$secondodds,$date,$time);
+         }
     }
 ?>
 
@@ -114,8 +136,16 @@
             </div>
         </header>
         <main>
+            
             <h2>Super Admin control panel for adding matches</h2>
-            <br><br>
+            <br>
+            <?php  
+                if(isset($error['ratname'])){
+					echo "<div>
+							<p style=' padding: 10px 0px; border-radius:1vh; background-color:red; text-align:center'>". $error['ratname']. "</p>
+						 </div>";
+                }
+            ?><br>
             <h3 style="padding-bottom: 30px;">Add the information for a match below:</h3>
             <form action="" method="post" id="login-form" autocomplete="off">
 
@@ -127,10 +157,17 @@
                         die('QUERY FAILED' . mysqli_error($connection));
                     }
                 ?>
-
+                
+                <?php  
+                    if(isset($error['firstrat'])){
+                        echo "<br><div>
+                                <p style=' padding: 10px 0px; border-radius:1vh; background-color:red; text-align:center'>". $error['firstrat']. "</p>
+                            </div><br>";
+                    }
+                ?>
                 <label for="firstrat"> First Rat's Name </label>
                 <select name="firstrat" id="firstrat" autocomplete="on">
-                    <option value="">-</option>
+                    <option value="-">-</option>
                     <?php 
                         while($fir_row = mysqli_fetch_array($select_comment_query)){
                             echo " <option value='". $fir_row['rat_name'] . "'>". $fir_row['rat_name']. "</option>";
@@ -140,10 +177,16 @@
 
                 <label for="firstodds"> First Rat's Odds </label>
                 <input type="number" step="0.01" id="firstodds" name="firstodds" placeholder="Odds..">
-
+                <?php  
+                    if(isset($error['secondrat'])){
+                        echo "<br><div>
+                                <p style=' padding: 10px 0px; border-radius:1vh; background-color:red; text-align:center'>". $error['secondrat']. "</p>
+                            </div><br>";
+                    }
+                ?>      
                 <label for="secondrat"> Second Rat's Name </label>
                 <select name="secondrat" id="secondrat" autocomplete="on">
-                <option value="">-</option>
+                <option value="-">-</option>
                 <?php 
                     while($sec_row = mysqli_fetch_array($first_row)){
                         echo " <option value='". $sec_row['rat_name'] . "'>". $sec_row['rat_name']. "</option>";
