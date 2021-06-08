@@ -130,6 +130,7 @@ function email_exists($email,$connection){
           $db_username = $row['nickname'];
           $db_user_password = $row['password'];
           $avatar_link = $row['avatar_link'];
+          $money = $row['money'];
           $user_id = $row['id'];
       }
 
@@ -140,6 +141,7 @@ function email_exists($email,$connection){
           $_SESSION['role'] = $db_user_role;
           $_SESSION['avatar_link'] = $avatar_link;
           $_SESSION['user_id'] = $user_id;
+          $_SESSION['money'] = $money;
           header("Location: index.php");
         }else{
           header("Location: landing_page.html");
@@ -252,6 +254,16 @@ function addMatchesTickest($connection,$rat_id){
         }
       
     }
+}
+
+function updateMoney($connection, $id_user, $money){
+  $query = "UPDATE users SET ";
+  $query .= "money = '{$money}' ";
+  $query .= "WHERE id = '{$id_user}'";
+  $update_user = mysqli_query($connection, $query);
+  if(!$update_user ){
+    die("Query failed" . mysqli_error($connection));
+  }
 }
 
 ?>

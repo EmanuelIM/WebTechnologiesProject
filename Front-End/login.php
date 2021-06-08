@@ -95,7 +95,7 @@
 				</div>
 				<?php  if(isset($error['username'])){
 					echo "<div>
-							<a class='btn' href='signup.php' style='color:white; padding-top: 1vh; text-align:center;'>New Here?</a>
+							<a class='btn' href='signup.php' style='height:4vh;border-radius:1vh; background-color:red; text-align:center; padding-top:1vh;'>New Here?</a>
 						 </div>";
 				}?>
 				<div class="input-div pass">

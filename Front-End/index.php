@@ -5,7 +5,12 @@
     if(!isset($_SESSION['username'])){
         header("Location: landing_page.html");
     }
-    
+    $query = "SELECT money FROM users WHERE nickname = '".$_SESSION['username']."'";
+    $select_comment_query = mysqli_query($connection, $query);
+    $money = 0;
+    while($row = mysqli_fetch_array($select_comment_query)){
+        $money = $row['money'];
+    }
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $total_ammount = trim($_POST['totalMoney']);
@@ -15,10 +20,25 @@
         $buttons = trim($_POST['buttons']);
         preg_match_all('!\d+!', $buttons, $rat_id);
 
-        addticket($connection,getId($connection,$_SESSION['username']),$ticket_value,$total_ammount,$total_elevation,$total_matches);
-        addMatchesTickest($connection,$rat_id);
-        header('Location: index.php');
-        exit();
+        $error = [
+			'money' => ''
+		 ];
+        if($ticket_value > $money){
+            $error['money'] = "You don't have enough money";
+        }
+
+        foreach ($error as $key => $value) {
+			if(empty($value)){
+				unset($error[$key]);
+			}
+		 }
+		if(empty($error)){
+            addticket($connection,getId($connection,$_SESSION['username']),$ticket_value,$total_ammount,$total_elevation,$total_matches);
+            addMatchesTickest($connection,$rat_id);
+            updateMoney($connection,getId($connection,$_SESSION['username']),$money-$ticket_value);
+            header('Location: index.php');
+            exit();
+		}
     }
 
    
@@ -80,6 +100,7 @@
         </div>
     </div>
     <div class="main-content">
+       
         <header>
             <h2>
                 <label for="nav-toggle">
@@ -106,6 +127,13 @@
             </div>
         </header>
         <main>
+        <?php  
+            if(isset($error['money'])){
+					echo "<div>
+                            <p style='height:4vh;border-radius:1vh; background-color:red; text-align:center; padding-top:1vh;'>". $error['money']. "</p>
+						 </div>";
+		    }
+        ?>
             <div class="cards">
                 <div class="card-single">
                     <div>
@@ -168,16 +196,8 @@
                     <div>
                     
                         <h1>
-                        <?php
-                        $query = "SELECT money FROM users WHERE nickname = '".$_SESSION['username']."'";
-                        $select_comment_query = mysqli_query($connection, $query);
-                        $money = 0;
-                        while($row = mysqli_fetch_array($select_comment_query)){
-                            $money = $row['money'];
-                        }
-
-                        echo $money;
-                    ?>$</h1>
+                        <?php echo $money;?>$
+                        </h1>
                         <span>Your current balance</span>
                     </div>
                     <div>
