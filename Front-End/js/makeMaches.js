@@ -20,11 +20,11 @@ function resetButton1(num) {
             matchesArray[i] = button2;
             found = true;
         }
-        
     }
     if(found === false){
         matchesArray.push(button2);
     }
+    console.log("HERE");
     document.getElementById(button1).disabled = false;
     document.getElementById(button2).disabled = true;
 }
