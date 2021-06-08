@@ -236,8 +236,8 @@
                                                  }
                                                 if($can_bet == 0)
                                                 {
-                                                    echo  "<td><input class='largeBTN' type='button' id='button".$button_number."' value=". $row['first_odds']  . " disabled='disable'></td>";
-                                                    echo  "<td><input class='largeBTN' type='button' id='button".$button_number."' value=". $row['first_odds']  . " disabled='disable'></td>";
+                                                    echo  "<td><input class='largeBTN' type='button' style = 'background-color:#DB6060;' id='button".$button_number."' value=". $row['first_odds']  . " disabled='disable'></td>";
+                                                    echo  "<td><input class='largeBTN' type='button' style = 'background-color:#DB6060;' id='button".$button_number."' value=". $row['first_odds']  . " disabled='disable'></td>";
                                                 }
                                                 else
                                                 {
