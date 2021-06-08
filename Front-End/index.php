@@ -1,10 +1,46 @@
 <?php 
     include "includes/db_connection.php";
     session_start();
-
     if(!isset($_SESSION['username'])){
         header("Location: landing_page.html");
     }
+    
+
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        $total_ammount = trim($_POST['totalMoney']);
+        $ticket_value = trim($_POST['ticketValue']);
+        $total_elevation = trim($_POST['totalElevation']);
+        $total_matches = trim($_POST['totalMatches']);
+        $query = "SELECT * FROM matches";
+        $select_matches_query = mysqli_query($connection, $query);
+        $rats = array();
+        for($i = 1; $i <= $total_matches*2; $i++){
+            $tmp =1;
+            $tmp_query = $select_matches_query;
+            while($tmp <= $i && $row = mysqli_fetch_array($tmp_query)){
+                if($tmp == $i){
+                    if (isset($_POST['button'.$tmp])){
+                        echo "hereeeee1";
+                        array_push($rats,$row['first_rat']);
+                    }
+                }
+                $tmp++;
+                if($tmp == $i){
+                    if (isset($_POST['button'.$tmp])){
+                        echo "hereeeee2";
+                        array_push($rats,$row['second_rat']);
+                    }
+                }
+                $tmp++;
+            }
+        }
+        echo "<h1>".$total_matches . " " . $total_elevation. " " . $ticket_value . " " . $total_ammount. " </h1><br>";
+        foreach($rats as $rat){
+            echo "<h1> " . $rat . "</h1><br>";
+        }
+    }
+
+   
 ?>
 
 
@@ -168,108 +204,110 @@
                     </div>
                 </div>
             </div>
-            <div class="recent-grid">
-                <div class="projects">
-                <a href="past_matches.php" class="button button1"> Past Matches</a>
-                <a href="future_matches.php" class="button button2"> Future Matches</a>
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Today's Matches</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table width="100%">
-                                    <thead>
-                                        <tr>
-                                            <td>Match</td>
-                                            <td style="padding-left:6%;">1</td>
-                                            <td style="padding-left: 6%;">2</td>
-                                            <td style="padding-left: 10%;">Time</td>
-                                        </tr>
-                                    </thead>
+            <form action="" method="post" id="update-form" autocomplete="off">
+                <div class="recent-grid">
+                    <div class="projects">
+                    <a href="past_matches.php" class="button button1"> Past Matches</a>
+                    <a href="future_matches.php" class="button button2"> Future Matches</a>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Today's Matches</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table width="100%">
+                                        <thead>
+                                            <tr>
+                                                <td>Match</td>
+                                                <td style="padding-left:6%;">1</td>
+                                                <td style="padding-left: 6%;">2</td>
+                                                <td style="padding-left: 10%;">Time</td>
+                                            </tr>
+                                        </thead>
 
-                                    <?php  
-                                        $query = "SELECT * FROM matches";
-                                        $select_comment_query = mysqli_query($connection, $query);
-                                        if(!$select_comment_query){
-                                            die('QUERY FAILED' . mysqli_error($connection));
-                                        }
-                                    ?>
-                                    <tbody>
-
-                                        <?php 
-                                        $button_number = 0;
-                                            while($row = mysqli_fetch_array($select_comment_query)){
-                                                if($row['date'] == $date){
-                                                echo "<tr>";
-                                                echo "<td><a href='ratProfile.php?name=".$row['first_rat']."'>". $row['first_rat']  ."</a> vs <a href='ratProfile.php?name=".$row['second_rat']."'>". $row['second_rat']  ."</a></td>";
-                                                
-                                            $button_number +=1;
-                                            echo  "<td><input class='largeBTN' type='button' id='button".$button_number."' value=". $row['first_odds']  . " onclick='resetButton2(".$button_number.")'></td>";
-                                            $button_number +=1;
-                                            echo  "<td><input class='largeBTN' type='button' id='button".$button_number."' value=". $row['second_odds']  . " onclick='resetButton1(".$button_number.")'></td>";
-                                            echo "<td>".$row['time']."</td>";
-                                            
-                                            echo "</tr>";
+                                        <?php  
+                                            $query = "SELECT * FROM matches";
+                                            $select_comment_query = mysqli_query($connection, $query);
+                                            if(!$select_comment_query){
+                                                die('QUERY FAILED' . mysqli_error($connection));
                                             }
-                                        }
                                         ?>
-                                       
-                                    </tbody>
-                                </table>
+                                        <tbody>
+
+                                            <?php 
+                                                $button_number = 0;
+                                                while($row = mysqli_fetch_array($select_comment_query)){
+                                                    if($row['date'] == $date){
+                                                    echo "<tr>";
+                                                    echo "<td><a href='ratProfile.php?name=".$row['first_rat']."'>". $row['first_rat']  ."</a> vs <a href='ratProfile.php?name=".$row['second_rat']."'>". $row['second_rat']  ."</a></td>";
+                                                    
+                                                $button_number +=1;
+                                                echo  "<td><input class='largeBTN' type='button' name='button".$button_number."' id='button".$button_number."' value=". $row['first_odds']  . " onclick='resetButton2(".$button_number.")'></td>";
+                                                $button_number +=1;
+                                                echo  "<td><input class='largeBTN' type='button' name='button".$button_number."' id='button".$button_number."' value=". $row['second_odds']  . " onclick='resetButton1(".$button_number.")'></td>";
+                                                echo "<td>".$row['time']."</td>";
+                                                
+                                                echo "</tr>";
+                                                }
+                                            }
+                                            ?>
+                                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="customers">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Your ticket</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="customer">
+                                    <div class="info">
+                                        <h2>Total elevation</h2>
+                                    </div>
+                                    <div class="contact">
+                                        <h2>Total matches</h2>
+                                    </div>
+                                </div>
+                                <div class="customer">
+                                    <div class="info">
+                                        <input class="borderOnClick" name="totalElevation" type="text" id="elev" value="0"
+                                            style="text-align: center;"></input>
+                                    </div>
+                                    <div class="contact">
+                                        <input class="borderOnClick" name="totalMatches" type="text" id="inc" value="0"
+                                            style="text-align: center;"></input>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h2 class="ammount">What are you willing to pay?</h2>
+                                    <div>
+                                        <input class="borderOnClick alignBtn" name="ticketValue" type="number" id="ticketValue"
+                                            placeholder="Enter how much money do you want to bet...">
+                                    </div>
+                                </div>
+                                <div style="padding-top: 10px;">
+                                    <input class="placeBet" type="button" onclick="calculateMoney()"
+                                        value="Calculate how much you will make">
+                                </div>
+                                <div>
+                                    <h2 class="ammount">If everything goes your way, you will make..</h2>
+                                    <div>
+                                        <input class="borderOnClick alignBtn" name="totalMoney" id="totalMoney" value="0">
+                                    </div>
+                                </div>
+                                <div>
+                                    <h2 class="ammount">Place your bet if you are happy with your rats!!</h2>
+                                    <input type="submit" class="placeBet" id="submit" value="Submit">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="customers">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Your ticket</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="customer">
-                                <div class="info">
-                                    <h2>Total elevation</h2>
-                                </div>
-                                <div class="contact">
-                                    <h2>Total matches</h2>
-                                </div>
-                            </div>
-                            <div class="customer">
-                                <div class="info">
-                                    <input class="borderOnClick" type="text" id="elev" value="0"
-                                        style="text-align: center;"></input>
-                                </div>
-                                <div class="contact">
-                                    <input class="borderOnClick" type="text" id="inc" value="0"
-                                        style="text-align: center;"></input>
-                                </div>
-                            </div>
-                            <div>
-                                <h2 class="ammount">What are you willing to pay?</h2>
-                                <div>
-                                    <input class="borderOnClick alignBtn" type="number" id="ticketValue"
-                                        placeholder="Enter how much money do you want to bet...">
-                                </div>
-                            </div>
-                            <div style="padding-top: 10px;">
-                                <input class="placeBet" type="button" onclick="calculateMoney()"
-                                    value="Calculate how much you will make">
-                            </div>
-                            <div>
-                                <h2 class="ammount">If everything goes your way, you will make..</h2>
-                                <div>
-                                    <input class="borderOnClick alignBtn" id="totalMoney" value="0">
-                                </div>
-                            </div>
-                            <div>
-                                <h2 class="ammount">Place your bet if you are happy with your rats!!</h2>
-                                <button class="placeBet">Place your bet!!</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </form>
         </main>
     </div>
     <script src="js/makeMaches.js"></script>
