@@ -130,6 +130,7 @@ function email_exists($email,$connection){
           $db_username = $row['nickname'];
           $db_user_password = $row['password'];
           $avatar_link = $row['avatar_link'];
+          $user_id = $row['id'];
       }
 
       if(password_verify($password, $db_user_password)){
@@ -138,10 +139,21 @@ function email_exists($email,$connection){
           $_SESSION['lastname'] = $db_user_lastname;
           $_SESSION['role'] = $db_user_role;
           $_SESSION['avatar_link'] = $avatar_link;
+          $_SESSION['user_id'] = $user_id;
           header("Location: index.php");
         }else{
           header("Location: landing_page.html");
         }
+}
+
+function getId($connection,$username){
+      $query = "SELECT * FROM users WHERE nickname LIKE('{$username}')";
+      $select_user_query = mysqli_query($connection, $query);
+      $id_user =0;
+      while($row = mysqli_fetch_array($select_user_query)){
+          $id_user = $row['id'];
+      }
+      return $id_user;  
 }
 
 function update_user($connection,$username,$email,$password,$first_name,$second_name,$username_update,$avatar_link){
@@ -173,6 +185,72 @@ function update_user($connection,$username,$email,$password,$first_name,$second_
       $_SESSION['avatar_link'] = $avatar_link;
       header('Location: index.php');
       exit();
+    }
+}
+
+function  addticket($connection,$user_id,$money_betted, $total_money, $total_elevation, $total_matches){
+  $user_id   = mysqli_real_escape_string($connection, $user_id);
+  $money_betted   = mysqli_real_escape_string($connection, $money_betted);
+  $total_money   = mysqli_real_escape_string($connection, $total_money);
+  $total_elevation   = mysqli_real_escape_string($connection, $total_elevation);
+  $total_matches   = mysqli_real_escape_string($connection, $total_matches);
+  $query = "INSERT INTO tickets (user_id, money_betted,total_money, total_elevation, total_matches)";
+  $query .= "VALUES('{$user_id}', '{$money_betted}', '{$total_money}', '{$total_elevation}', '{$total_matches}')";
+  $add_ticket_query = mysqli_query($connection, $query);
+  if(!$add_ticket_query ){
+      die("Query failed" . mysqli_error($connection));
+  }
+}
+
+function  addMatchTicket($connection,$id_ticket,$match_id, $name_rat_betted){
+  $id_ticket   = mysqli_real_escape_string($connection, $id_ticket);
+  $match_id   = mysqli_real_escape_string($connection, $match_id);
+  $name_rat_betted   = mysqli_real_escape_string($connection, $name_rat_betted);
+  $query = "INSERT INTO matches_tickets (ticket_id, match_id,name_rat_betted)";
+  $query .= "VALUES('{$id_ticket}', '{$match_id}', '{$name_rat_betted}')";
+  $add_match_query = mysqli_query($connection, $query);
+  if(!$add_match_query ){
+      die("Query failed" . mysqli_error($connection));
+  }
+}
+
+function getTicketId($connection, $user_id){
+  $query = "SELECT * FROM tickets WHERE user_id = '{$user_id}'";
+  $get_matches_query = mysqli_query($connection, $query);
+  $id_ticket =0;
+  while($row = mysqli_fetch_array($get_matches_query)){
+      $id_ticket = $row['id'];
+  }
+  return $id_ticket;
+}
+
+function addMatchesTickest($connection,$rat_id){
+    $id_ticket = getTicketId($connection,getId($connection,$_SESSION['username']));
+      
+    $current_time = date("H:i:s");
+    for($i =0;$i < count($rat_id[0]); $i++){
+        echo $rat_id[0][$i] ."\xA";
+        $query = "SELECT * FROM matches";
+        $select_matches_query = mysqli_query($connection, $query);
+        $tmp_count = 1;
+        while($tmp_count <= $rat_id[0][$i] && $row = mysqli_fetch_array($select_matches_query)){
+            $time = $row['time'];
+            $match_time = date("H:i:s",strtotime($time));
+            $match_end_time = date("H:i:s",strtotime($match_time . " - 10 minutes"));
+            if($current_time < $match_end_time){
+                if($tmp_count == $rat_id[0][$i]){
+                    addMatchTicket($connection,$id_ticket,$row['id'],$row['first_rat']);
+                    echo "<h1> " . $row['first_rat'] . " </h1>";
+                }
+                $tmp_count++;
+                if($tmp_count == $rat_id[0][$i]){
+                    addMatchTicket($connection,$id_ticket,$row['id'],$row['second_rat']);
+                    echo "<h1> " . $row['second_rat'] . " </h1>";
+                }
+                $tmp_count++;
+            }
+        }
+      
     }
 }
 

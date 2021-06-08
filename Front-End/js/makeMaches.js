@@ -63,5 +63,5 @@ function resetButton2(num) {
 function calculateMoney() {
     var sum = Math.round(elevation * parseFloat(document.getElementById('ticketValue').value) * 100) / 100 ;
     document.getElementById("totalMoney").value = sum;
-    document.getElementById("submit").value = matchesArray;
+    document.getElementById("buttons").value = matchesArray;
 }

@@ -1,5 +1,6 @@
 <?php 
     include "includes/db_connection.php";
+    include "includes/functions.php";
     session_start();
     if(!isset($_SESSION['username'])){
         header("Location: landing_page.html");
@@ -11,33 +12,13 @@
         $ticket_value = trim($_POST['ticketValue']);
         $total_elevation = trim($_POST['totalElevation']);
         $total_matches = trim($_POST['totalMatches']);
-        $query = "SELECT * FROM matches";
-        $select_matches_query = mysqli_query($connection, $query);
-        $rats = array();
-        for($i = 1; $i <= $total_matches*2; $i++){
-            $tmp =1;
-            $tmp_query = $select_matches_query;
-            while($tmp <= $i && $row = mysqli_fetch_array($tmp_query)){
-                if($tmp == $i){
-                    if (isset($_POST['button'.$tmp])){
-                        echo "hereeeee1";
-                        array_push($rats,$row['first_rat']);
-                    }
-                }
-                $tmp++;
-                if($tmp == $i){
-                    if (isset($_POST['button'.$tmp])){
-                        echo "hereeeee2";
-                        array_push($rats,$row['second_rat']);
-                    }
-                }
-                $tmp++;
-            }
-        }
-        echo "<h1>".$total_matches . " " . $total_elevation. " " . $ticket_value . " " . $total_ammount. " </h1><br>";
-        foreach($rats as $rat){
-            echo "<h1> " . $rat . "</h1><br>";
-        }
+        $buttons = trim($_POST['buttons']);
+        preg_match_all('!\d+!', $buttons, $rat_id);
+
+        addticket($connection,getId($connection,$_SESSION['username']),$ticket_value,$total_ammount,$total_elevation,$total_matches);
+        addMatchesTickest($connection,$rat_id);
+        header('Location: index.php');
+        exit();
     }
 
    
@@ -310,6 +291,7 @@
                                     <h2 class="ammount">If everything goes your way, you will make..</h2>
                                     <div>
                                         <input class="borderOnClick alignBtn" name="totalMoney" id="totalMoney" value="0">
+                                        <input name="buttons" id="buttons" value="" type="hidden">
                                     </div>
                                 </div>
                                 <div>
