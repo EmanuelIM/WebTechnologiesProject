@@ -1,47 +1,47 @@
-<?php 
-    include "includes/db_connection.php";
-    include "includes/functions.php";
-    session_start();
-    if(!isset($_SESSION['username'])){
-        header("Location: landing_page.html");
-    }
-    $query = "SELECT money FROM users WHERE nickname = '".$_SESSION['username']."'";
-    $select_comment_query = mysqli_query($connection, $query);
-    $money = 0;
-    while($row = mysqli_fetch_array($select_comment_query)){
-        $money = $row['money'];
+<?php
+include "includes/db_connection.php";
+include "includes/functions.php";
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: landing_page.html");
+}
+$query = "SELECT money FROM users WHERE nickname = '" . $_SESSION['username'] . "'";
+$select_comment_query = mysqli_query($connection, $query);
+$money = 0;
+while ($row = mysqli_fetch_array($select_comment_query)) {
+    $money = $row['money'];
+}
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $total_ammount = trim($_POST['totalMoney']);
+    $ticket_value = trim($_POST['ticketValue']);
+    $total_elevation = trim($_POST['totalElevation']);
+    $total_matches = trim($_POST['totalMatches']);
+    $buttons = trim($_POST['buttons']);
+    preg_match_all('!\d+!', $buttons, $rat_id);
+
+    $error = [
+        'money' => ''
+    ];
+    if ($ticket_value > $money) {
+        $error['money'] = "You don't have enough money";
     }
 
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        $total_ammount = trim($_POST['totalMoney']);
-        $ticket_value = trim($_POST['ticketValue']);
-        $total_elevation = trim($_POST['totalElevation']);
-        $total_matches = trim($_POST['totalMatches']);
-        $buttons = trim($_POST['buttons']);
-        preg_match_all('!\d+!', $buttons, $rat_id);
-
-        $error = [
-			'money' => ''
-		 ];
-        if($ticket_value > $money){
-            $error['money'] = "You don't have enough money";
+    foreach ($error as $key => $value) {
+        if (empty($value)) {
+            unset($error[$key]);
         }
-
-        foreach ($error as $key => $value) {
-			if(empty($value)){
-				unset($error[$key]);
-			}
-		 }
-		if(empty($error)){
-            addticket($connection,getId($connection,$_SESSION['username']),$ticket_value,$total_ammount,$total_elevation,$total_matches);
-            addMatchesTickest($connection,$rat_id);
-            updateMoney($connection,getId($connection,$_SESSION['username']),$money-$ticket_value);
-            header('Location: index.php');
-            exit();
-		}
     }
+    if (empty($error)) {
+        addticket($connection, getId($connection, $_SESSION['username']), $ticket_value, $total_ammount, $total_elevation, $total_matches);
+        addMatchesTickest($connection, $rat_id);
+        updateMoney($connection, getId($connection, $_SESSION['username']), $money - $ticket_value);
+        header('Location: index.php');
+        exit();
+    }
+}
 
-   
+
 ?>
 
 <!DOCTYPE html>
@@ -134,7 +134,7 @@
                 if (!$select_comment_query) {
                     die('QUERY FAILED' . mysqli_error($connection));
                 }
-                
+
                 ?>
                 <tbody>
                     <?php
@@ -151,7 +151,7 @@
                         echo "<tr>";
                         echo "<td>";
                         while ($row2 = mysqli_fetch_array($select_comment_query2)) {
-                            
+
                             $number_of_matches++;
                             $query3 = "SELECT * FROM matches WHERE id = '{$row2['match_id']}'";
                             $select_comment_query3 = mysqli_query($connection, $query3);
@@ -164,39 +164,48 @@
                                 die('QUERY FAILED' . mysqli_error($connection));
                             }
                             $row3 = mysqli_fetch_array($select_comment_query4);
-                            
+
                             $row4 = mysqli_fetch_array($select_comment_query3);
-                            if($row2['id_rat_winner'] === 0) $ongoing = 1;
-                            else if($row2['id_rat_winner'] === $row3['id']) $number_of_correct_matches++;
-                            if($row4['first_rat'] === $row2['name_rat_betted'])
+                            if ($row2['id_rat_winner'] == 0)
                             {
-                            echo "<b>". $row4['first_rat'] ."</b> vs ". $row4['second_rat'] ."";
+                                $ongoing = 1;
                             }
-                            else
-                            {
-                                echo "". $row4['first_rat'] ." vs <b>". $row4['second_rat'] ."</b>";
+                            else if ($row2['id_rat_winner'] === $row3['id']) $number_of_correct_matches++;
+                            if ($row4['first_rat'] === $row2['name_rat_betted']) {
+                                echo "<b>" . $row4['first_rat'] . "</b> vs " . $row4['second_rat'] . "";
+                            } else {
+                                echo "" . $row4['first_rat'] . " vs <b>" . $row4['second_rat'] . "</b>";
                             }
                             echo "<br>";
-                            echo "(".$row4['date'].";".$row4['time'].")";
+                            echo "(" . $row4['date'] . ";" . $row4['time'] . ")";
                             echo "<br>";
-                            
                         }
                         echo "</td>";
-                        echo "<td>". $number_of_matches ." </td>";
-                        echo "<td>". $number_of_correct_matches ."/".$number_of_matches ." </td>";
-                        echo "<td>".$row['money_betted']."$";
-                        echo "<td>".$row['total_money']."$";
-                        if($ongoing === 1)
-                        {
+                        echo "<td>" . $number_of_matches . " </td>";
+                        echo "<td>" . $number_of_correct_matches . "/" . $number_of_matches . " </td>";
+                        echo "<td>" . $row['money_betted'] . "$";
+                        echo "<td>" . $row['total_money'] . "$";
+                        if ($ongoing == 1) {
                             echo "<td style=' color:gray;'>ONGOING</td>";
-                        }
-                        
-                        else if($number_of_matches === $number_of_correct_matches)
-                        {
+                        } else if ($number_of_matches === $number_of_correct_matches) {
                             echo "<td style=' color:green;'>WINNER</td>";
-                        }
-                        else
-                        {
+                            $queryf = "SELECT money FROM users WHERE nickname = '" . $_SESSION['username'] . "'";
+                            $select_comment_queryf = mysqli_query($connection, $queryf);
+                            $money = 0;
+                            while ($rowf = mysqli_fetch_array($select_comment_queryf)) {
+                                $money = $rowf['money'];
+                            }
+                            if($row['withdrawed'] == 0)
+                            {
+                                echo "<br> <br> <h2> Congrats! You have winner tickets! Funds have been added to your account. Please check the dashboard for your money amount. </h2>";
+                                updateMoney($connection,getId($connection,$_SESSION['username']),$money+$row['total_money']);
+                                $withdraw_query = "UPDATE tickets SET withdrawed = 1 WHERE id = '{$row['id']}'";
+                                $update_status = mysqli_query($connection, $withdraw_query);
+                                if(!$update_status ){
+                                    die("Query failed" . mysqli_error($connection));
+                                  }
+                            }
+                        } else {
                             echo "<td style=' color:red;'>FAILED</td>";
                         }
                         echo "</tr>";

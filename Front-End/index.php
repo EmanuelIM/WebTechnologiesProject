@@ -155,7 +155,7 @@
                         $date = date('Y-m-d');
                         $current_time = date("H:i:s");
                         
-                        $query = "SELECT time FROM matches";
+                        $query = "SELECT * FROM matches WHERE date = '{$date}'";
                         $select_comment_query = mysqli_query($connection, $query);
                         $matches_ongoing = 0;
                         while($row = mysqli_fetch_array($select_comment_query)){
