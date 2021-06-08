@@ -165,9 +165,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <?php
                 echo "<img src='" . $_SESSION['avatar_link'] . "' width='100px' height='auto' alt='' style='float:left; align-items: center; border: 5px solid #555';>";
                 ?>
-            <h2>Hello, <?php echo $_SESSION['username'] ?>! (<?php echo $_SESSION['role'] ?>!)</h2>
+            <h2 style="padding-left: 10rem;">Hello, <?php echo $_SESSION['username'] ?>! (<?php echo $_SESSION['role'] ?>!)</h2>
             <br><br>
-            <h3 style="padding-bottom: 30px;">Change your profile information below</h3>
+            <h3 style="padding-left: 10rem; padding-bottom: 30px;">Change your profile information below</h3>
             <form action="" method="post" id="update-form" autocomplete="off">
 
                 <label for="firstname">First Name</label>

@@ -70,11 +70,7 @@
                 </label>
                 Dashboard
             </h2>
-            <div class="search-wrapper">
-                <span class="las la-search">
-                    <input type="search" placeholder="Search a match here" name="" id="">
-                </span>
-            </div>
+            
             <div class="user-wrapper">
                 <?php
                     echo "<img src='" . $_SESSION['avatar_link'] . "' width='30px' height='30px' alt='no'>";
@@ -140,15 +136,6 @@
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>1</h1>
-                        <span>Match(es) you have betted on (today)</span>
-                    </div>
-                    <div>
-                        <span class="las la-donate"></span>
-                    </div>
-                </div>
-                <div class="card-single">
-                    <div>
                     
                         <h1>
                         <?php
@@ -171,7 +158,6 @@
             <div class="recent-grid">
                 <div class="projects">
                 <a href="index.php" class="button button3"> Today's Matches</a>
-                <a href="future_matches.php" class="button button2"> Future Matches</a>
                     <div class="card">
                         <div class="card-header">
                             <h3>All Past Matches</h3>

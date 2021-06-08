@@ -108,11 +108,7 @@
                 </label>
                 Dashboard
             </h2>
-            <div class="search-wrapper">
-                <span class="las la-search">
-                    <input type="search" placeholder="Search a match here" name="" id="">
-                </span>
-            </div>
+            
             <div class="user-wrapper">
                 <?php
                     echo "<img src='" . $_SESSION['avatar_link'] . "' width='30px' height='30px' alt='no'>";
@@ -183,15 +179,7 @@
                         <span class="las la-broadcast-tower"></span>
                     </div>
                 </div>
-                <div class="card-single">
-                    <div>
-                        <h1>1</h1>
-                        <span>Match(es) you have betted on (today)</span>
-                    </div>
-                    <div>
-                        <span class="las la-donate"></span>
-                    </div>
-                </div>
+                
                 <div class="card-single">
                     <div>
                     
@@ -209,10 +197,9 @@
                 <div class="recent-grid">
                     <div class="projects">
                     <a href="past_matches.php" class="button button1"> Past Matches</a>
-                    <a href="future_matches.php" class="button button2"> Future Matches</a>
                         <div class="card">
                             <div class="card-header">
-                                <h3>Today's Matches</h3>
+                                <h3>Today's and Future Matches</h3>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -236,7 +223,7 @@
                                         <?php 
                                         $button_number = 0;
                                             while($row = mysqli_fetch_array($select_comment_query)){
-                                                if($row['date'] == $date){
+                                                if($row['date'] >= $date){
                                                 echo "<tr>";
                                                 echo "<td><a href='ratProfile.php?name=".$row['first_rat']."'>". $row['first_rat']  ."</a> vs <a href='ratProfile.php?name=".$row['second_rat']."'>". $row['second_rat']  ."</a></td>";
                                                 $current_time = date("H:i:s");
@@ -244,13 +231,13 @@
                                                 $match_time = date("H:i:s",strtotime($time));
                                                 $match_end_time = date("H:i:s",strtotime($match_time . " - 10 minutes"));
                                                 $can_bet = 1;
-                                                if($current_time >= $match_end_time){
+                                                if($current_time >= $match_end_time && $date === $row['date']){
                                                         $can_bet = 0;
                                                  }
                                                 if($can_bet == 0)
                                                 {
-                                                    echo  "<td>". $row['first_odds']  . "</td>";
-                                                    echo  "<td>". $row['second_odds']  . "</td>";
+                                                    echo  "<td><input class='largeBTN' type='button' id='button".$button_number."' value=". $row['first_odds']  . " disabled='disable'></td>";
+                                                    echo  "<td><input class='largeBTN' type='button' id='button".$button_number."' value=". $row['first_odds']  . " disabled='disable'></td>";
                                                 }
                                                 else
                                                 {
