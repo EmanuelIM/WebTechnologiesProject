@@ -1,6 +1,6 @@
 var matches = 0;
 var elevation = 0;
-var matchesArray;
+var matchesArray = new Array();
 function resetButton1(num) {
     var button2 = "button" + num;
     num = num - 1;
@@ -61,7 +61,7 @@ function resetButton2(num) {
 
 
 function calculateMoney() {
-    var sum = Math.round(elevation * parseFloat(document.getElementById('ticketValue').value) * 100) ;
+    var sum = Math.round(elevation * parseFloat(document.getElementById('ticketValue').value) * 100) / 100 ;
     document.getElementById("totalMoney").value = sum;
     document.getElementById("submit").value = matchesArray;
 }

@@ -314,7 +314,7 @@
                                 </div>
                                 <div>
                                     <h2 class="ammount">Place your bet if you are happy with your rats!!</h2>
-                                    <input type="submit" class="placeBet" id="submit" value="Submit">
+                                    <input type="submit" class="placeBet" id="submit" value="Place your bet!">
                                 </div>
                             </div>
                         </div>
