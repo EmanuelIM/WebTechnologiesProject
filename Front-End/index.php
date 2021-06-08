@@ -182,8 +182,8 @@
                                     <thead>
                                         <tr>
                                             <td>Match</td>
-                                            <td style="padding-left:6%;">1</td>
-                                            <td style="padding-left: 6%;">2</td>
+                                            <td style="padding-left:2.5%;">1</td>
+                                            <td style="padding-left: 2.5%;">2</td>
                                             <td style="padding-left: 10%;">Time</td>
                                         </tr>
                                     </thead>
@@ -203,11 +203,26 @@
                                                 if($row['date'] == $date){
                                                 echo "<tr>";
                                                 echo "<td><a href='ratProfile.php?name=".$row['first_rat']."'>". $row['first_rat']  ."</a> vs <a href='ratProfile.php?name=".$row['second_rat']."'>". $row['second_rat']  ."</a></td>";
-                                                
-                                            $button_number +=1;
-                                            echo  "<td><input class='largeBTN' type='button' id='button".$button_number."' value=". $row['first_odds']  . " onclick='resetButton2(".$button_number.")'></td>";
-                                            $button_number +=1;
-                                            echo  "<td><input class='largeBTN' type='button' id='button".$button_number."' value=". $row['second_odds']  . " onclick='resetButton1(".$button_number.")'></td>";
+                                                $current_time = date("H:i:s");
+                                                $time = $row['time'];
+                                                $match_time = date("H:i:s",strtotime($time));
+                                                $match_end_time = date("H:i:s",strtotime($match_time . " - 10 minutes"));
+                                                $can_bet = 1;
+                                                if($current_time >= $match_end_time){
+                                                        $can_bet = 0;
+                                                 }
+                                            if($can_bet == 0)
+                                            {
+                                                echo  "<td>". $row['first_odds']  . "</td>";
+                                                echo  "<td>". $row['second_odds']  . "</td>";
+                                            }
+                                            else
+                                            {
+                                                $button_number += 1;
+                                                echo  "<td><input class='largeBTN' type='button' id='button".$button_number."' value=". $row['first_odds']  . " onclick='resetButton2(".$button_number.")'></td>";
+                                                $button_number += 1;
+                                                echo  "<td><input class='largeBTN' type='button' id='button".$button_number."' value=". $row['second_odds']  . " onclick='resetButton1(".$button_number.")'></td>";
+                                            }
                                             echo "<td>".$row['time']."</td>";
                                             
                                             echo "</tr>";
