@@ -224,7 +224,6 @@
                                                 <td style="padding-left: 10%;">Time</td>
                                             </tr>
                                         </thead>
-
                                         <?php  
                                             $query = "SELECT * FROM matches";
                                             $select_comment_query = mysqli_query($connection, $query);
@@ -233,18 +232,32 @@
                                             }
                                         ?>
                                         <tbody>
-
-                                            <?php 
-                                                $button_number = 0;
-                                                while($row = mysqli_fetch_array($select_comment_query)){
-                                                    if($row['date'] == $date){
-                                                    echo "<tr>";
-                                                    echo "<td><a href='ratProfile.php?name=".$row['first_rat']."'>". $row['first_rat']  ."</a> vs <a href='ratProfile.php?name=".$row['second_rat']."'>". $row['second_rat']  ."</a></td>";
-                                                    
-                                                $button_number +=1;
-                                                echo  "<td><input class='largeBTN' type='button' name='button".$button_number."' id='button".$button_number."' value=". $row['first_odds']  . " onclick='resetButton2(".$button_number.")'></td>";
-                                                $button_number +=1;
-                                                echo  "<td><input class='largeBTN' type='button' name='button".$button_number."' id='button".$button_number."' value=". $row['second_odds']  . " onclick='resetButton1(".$button_number.")'></td>";
+                                        <?php 
+                                        $button_number = 0;
+                                            while($row = mysqli_fetch_array($select_comment_query)){
+                                                if($row['date'] == $date){
+                                                echo "<tr>";
+                                                echo "<td><a href='ratProfile.php?name=".$row['first_rat']."'>". $row['first_rat']  ."</a> vs <a href='ratProfile.php?name=".$row['second_rat']."'>". $row['second_rat']  ."</a></td>";
+                                                $current_time = date("H:i:s");
+                                                $time = $row['time'];
+                                                $match_time = date("H:i:s",strtotime($time));
+                                                $match_end_time = date("H:i:s",strtotime($match_time . " - 10 minutes"));
+                                                $can_bet = 1;
+                                                if($current_time >= $match_end_time){
+                                                        $can_bet = 0;
+                                                 }
+                                                if($can_bet == 0)
+                                                {
+                                                    echo  "<td>". $row['first_odds']  . "</td>";
+                                                    echo  "<td>". $row['second_odds']  . "</td>";
+                                                }
+                                                else
+                                                {
+                                                    $button_number += 1;
+                                                    echo  "<td><input class='largeBTN' type='button' id='button".$button_number."' value=". $row['first_odds']  . " onclick='resetButton2(".$button_number.")'></td>";
+                                                    $button_number += 1;
+                                                    echo  "<td><input class='largeBTN' type='button' id='button".$button_number."' value=". $row['second_odds']  . " onclick='resetButton1(".$button_number.")'></td>";
+                                                }
                                                 echo "<td>".$row['time']."</td>";
                                                 
                                                 echo "</tr>";
