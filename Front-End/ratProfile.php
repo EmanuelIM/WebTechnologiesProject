@@ -28,7 +28,6 @@
         $gender              = $row['gender'];
         $club                = $row['club'];
 
-        echo "<h1>HERE FIRST </h1>";
     }
 ?>  
 
@@ -64,9 +63,6 @@
                 </li>
                 <li><a href="your_bets.php"><span class="las la-clipboard-list"></span>
                         <span>Your Bets</span></a>
-                </li>
-                <li><a href="ratProfile.php" class="active"><span class="las la-id-badge"></span>
-                        <span>Rat Profile (For demo purposes)</span></a>
                 </li>
                 <li><a href="credit_card.php"><span class="las la-wallet"></span>
                         <span>Add Money</span></a>

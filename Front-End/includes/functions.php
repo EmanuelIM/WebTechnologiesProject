@@ -228,18 +228,19 @@ function getTicketId($connection, $user_id){
 
 function addMatchesTickest($connection,$rat_id){
     $id_ticket = getTicketId($connection,getId($connection,$_SESSION['username']));
-      
+    date_default_timezone_set('Europe/Bucharest');
+    $date = date('Y-m-d');
     $current_time = date("H:i:s");
     for($i =0;$i < count($rat_id[0]); $i++){
         echo $rat_id[0][$i] ."\xA";
-        $query = "SELECT * FROM matches";
+        $query = "SELECT * FROM matches ORDER BY date,time ASC";
         $select_matches_query = mysqli_query($connection, $query);
         $tmp_count = 1;
         while($tmp_count <= $rat_id[0][$i] && $row = mysqli_fetch_array($select_matches_query)){
             $time = $row['time'];
             $match_time = date("H:i:s",strtotime($time));
             $match_end_time = date("H:i:s",strtotime($match_time . " - 10 minutes"));
-            if($current_time < $match_end_time){
+            if($current_time < $match_end_time && $date <= $row['date']){
                 if($tmp_count == $rat_id[0][$i]){
                     addMatchTicket($connection,$id_ticket,$row['id'],$row['first_rat']);
                     echo "<h1> " . $row['first_rat'] . " </h1>";

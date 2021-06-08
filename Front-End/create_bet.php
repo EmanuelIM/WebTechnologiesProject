@@ -96,9 +96,6 @@
                 <li><a href="your_bets.php"><span class="las la-clipboard-list"></span>
                         <span>Your Bets</span></a>
                 </li>
-                <li><a href="ratProfile.php"><span class="las la-id-badge"></span>
-                        <span>Rat Profile (For demo purposes)</span></a>
-                </li>
                 <li><a href="credit_card.php"><span class="las la-wallet"></span>
                         <span>Add Money</span></a>
                 </li>

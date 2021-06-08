@@ -79,9 +79,6 @@
                 <li><a href="your_bets.php"><span class="las la-clipboard-list"></span>
                         <span>Your Bets</span></a>
                 </li>
-                <li><a href="ratProfile.php"><span class="las la-id-badge"></span>
-                        <span>Rat Profile (For demo purposes)</span></a>
-                </li>
                 <li><a href="credit_card.php"><span class="las la-wallet"></span>
                         <span>Add Money</span></a>
                 </li>
@@ -207,13 +204,14 @@
                                         <thead>
                                             <tr>
                                                 <td>Match</td>
-                                                <td style="padding-left:6%;">1</td>
-                                                <td style="padding-left: 6%;">2</td>
-                                                <td style="padding-left: 10%;">Time</td>
+                                                <td style="padding-left:4%;">1</td>
+                                                <td style="padding-left: 4%;">2</td>
+                                                <td style="padding-left: 4%;">Date</td>
+                                                <td style="padding-left: 12%;">Time</td>
                                             </tr>
                                         </thead>
                                         <?php  
-                                            $query = "SELECT * FROM matches";
+                                            $query = "SELECT * FROM matches ORDER BY date,time ASC";
                                             $select_comment_query = mysqli_query($connection, $query);
                                             if(!$select_comment_query){
                                                 die('QUERY FAILED' . mysqli_error($connection));
@@ -246,6 +244,7 @@
                                                     $button_number += 1;
                                                     echo  "<td><input class='largeBTN' type='button' id='button".$button_number."' value=". $row['second_odds']  . " onclick='resetButton1(".$button_number.")'></td>";
                                                 }
+                                                echo "<td>".$row['date']."</td>";
                                                 echo "<td>".$row['time']."</td>";
                                                 
                                                 echo "</tr>";
