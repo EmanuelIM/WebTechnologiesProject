@@ -51,6 +51,7 @@
 		 }
 
 		 if(empty($error)){
+			if ($avatar_link =='') $avatar_link = 'https://png.pngtree.com/png-clipart/20200224/original/pngtree-cute-rat-avatar-with-a-yellow-background-png-image_5205694.jpg';
 			register_user($connection,$username,$email,$password,$first_name,$second_name,$age,$country,$avatar_link);
 		}
 	}

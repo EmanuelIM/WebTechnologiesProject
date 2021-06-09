@@ -8,6 +8,7 @@
     $query = "SELECT money FROM users WHERE nickname = '".$_SESSION['username']."'";
     $select_comment_query = mysqli_query($connection, $query);
     $money = 0;
+    determineWinner($connection);
     while($row = mysqli_fetch_array($select_comment_query)){
         $money = $row['money'];
     }
@@ -85,10 +86,10 @@
                 <?php 
                     if($_SESSION['role'] == 'admin'){
                         echo " <li><a href='add_rat.php'><span class='las la-id-badge'></span>
-                        <span>Add Rat</span></a>
+                        <span>Add Rat (admin only)</span></a>
                         </li>
                         <li><a href='create_bet.php'><span class='las la-caret-right'></span>
-                                <span>Add a match (SA Only)</span></a>
+                                <span>Add a match (admin only)</span></a>
                         </li>";
                     }
                 
@@ -103,7 +104,7 @@
                 <label for="nav-toggle">
                     <span class="las la-bars"></span>
                 </label>
-                Dashboard
+                Main dashboard of BetR! <br> Place bets, check elevations and winners.
             </h2>
             
             <div class="user-wrapper">
@@ -209,7 +210,8 @@
                                                 <td style="padding-left:4%;">1</td>
                                                 <td style="padding-left: 4%;">2</td>
                                                 <td style="padding-left: 4%;">Date</td>
-                                                <td style="padding-left: 12%;">Time</td>
+                                                <td style="padding-left: 2.5%;">Time</td>
+                                                <td style="padding-left: 12%">Winner</td>
                                             </tr>
                                         </thead>
                                         <?php  
@@ -236,8 +238,21 @@
                                                  }
                                                 if($can_bet == 0)
                                                 {
-                                                    echo  "<td><input class='largeBTN' type='button' style = 'background-color:#DB6060;' id='button".$button_number."' value=". $row['first_odds']  . " disabled='disable'></td>";
-                                                    echo  "<td><input class='largeBTN' type='button' style = 'background-color:#DB6060;' id='button".$button_number."' value=". $row['first_odds']  . " disabled='disable'></td>";
+                                                    if($row['rat_winner'] == '')
+                                                    {
+                                                        echo  "<td><input class='largeBTN' type='button' style = 'background-color:#CDD0CC;' id='button".$button_number."' value=". $row['first_odds']  . " disabled='disable'></td>";
+                                                        echo  "<td><input class='largeBTN' type='button' style = 'background-color:#CDD0CC;' id='button".$button_number."' value=". $row['second_odds']  . " disabled='disable'></td>";
+                                                    }
+                                                    else if($row['rat_winner'] == $row['first_rat'])
+                                                    {
+                                                        echo  "<td><input class='largeBTN' type='button' style = 'background-color:#A9FF8D;' id='button".$button_number."' value=". $row['first_odds']  . " disabled='disable'></td>";
+                                                        echo  "<td><input class='largeBTN' type='button' style = 'background-color:#FF9E8D;' id='button".$button_number."' value=". $row['second_odds']  . " disabled='disable'></td>";
+                                                    }
+                                                    else
+                                                    {
+                                                        echo  "<td><input class='largeBTN' type='button' style = 'background-color:#FF9E8D;' id='button".$button_number."' value=". $row['first_odds']  . " disabled='disable'></td>";
+                                                        echo  "<td><input class='largeBTN' type='button' style = 'background-color:#A9FF8D;' id='button".$button_number."' value=". $row['second_odds']  . " disabled='disable'></td>";
+                                                    }
                                                 }
                                                 else
                                                 {
@@ -248,6 +263,14 @@
                                                 }
                                                 echo "<td>".$row['date']."</td>";
                                                 echo "<td>".$row['time']."</td>";
+                                                if($row['rat_winner'] == '')
+                                                {
+                                                    echo "<td>Not decided</td>";
+                                                }
+                                                else
+                                                {
+                                                    echo "<td>".$row['rat_winner']."</td>";
+                                                }
                                                 
                                                 echo "</tr>";
                                                 }

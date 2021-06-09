@@ -173,6 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 $row3 = mysqli_fetch_array($select_comment_query4);
 
                                 $row4 = mysqli_fetch_array($select_comment_query3);
+                                
                                 if ($row2['name_rat_winner'] == '')
                                 {
                                     $ongoing = 1;
@@ -225,7 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     ?>
 
                     <div style="padding-left:40%; padding-top:3%;">  
-                        <a href="html_report.php" class="button button1"> Report In php</a>
+                        <a href="html_report.php" class="button button1"> HTML Report</a>
                     </div>
         </main>
     </div>

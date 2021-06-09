@@ -47,7 +47,7 @@
         href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="css/ratstyle.css">
     <link rel="stylesheet" href="css/user_profile_style.css">
-    <title>Jean-Claude Van Damme's Statistics</title>
+    <title><?php echo $ratname?>'s Statistics</title>
 </head>
 
 <body>
@@ -75,10 +75,10 @@
                 <?php 
                     if($_SESSION['role'] == 'admin'){
                         echo " <li><a href='add_rat.php'><span class='las la-id-badge'></span>
-                        <span>Add Rat</span></a>
+                        <span>Add Rat (admin only)</span></a>
                         </li>
                         <li><a href='create_bet.php'><span class='las la-caret-right'></span>
-                                <span>Add a match (SA Only)</span></a>
+                                <span>Add a match (admin only)</span></a>
                         </li>";
                     }
                 
@@ -114,14 +114,30 @@
             </div>
 
 
-            <table id="bets">
+            <table style="width:100%;" id="bets">
                 <caption>Last Five Matches</caption>
                 <tr>
-                    <td class="lose">L</td>
-                    <td class="lose">L</td>
-                    <td class="victory">W</td>
-                    <td class="victory">W</td>
-                    <td class="lose">L</td>
+                <?php 
+                $len = strlen($last_five_matches);
+                for($i = 0; $i < 5; ++$i)
+                {
+                    if($i < $len)
+                    {
+                        if($last_five_matches[$i] == 'L')
+                        {
+                            echo "<td class='lose'>L</td>";
+                        }
+                        else
+                        {
+                            echo "<td class='victory'>W</td>";
+                        }
+                    }
+                    else
+                    {
+                        echo "<td class='nodata'>-</td>";
+                    }
+                }
+                ?>
                 </tr>
             </table>
             <div class="birth">
@@ -131,7 +147,8 @@
                 <h2>Club       : <?php echo $club ?></h2>
             </div>
             <div class="details">
-                <h1>Short description:</h1>
+                <br>
+                <h2>Short description:</h2>
                 <p><?php echo $description ?></p>
             </div>
         </main>

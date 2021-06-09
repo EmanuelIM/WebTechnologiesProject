@@ -125,10 +125,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <?php
                 if ($_SESSION['role'] == 'admin') {
                     echo " <li><a href='add_rat.php'><span class='las la-id-badge'></span>
-                        <span>Add Rat</span></a>
+                        <span>Add Rat (admin only)</span></a>
                         </li>
                         <li><a href='create_bet.php'><span class='las la-caret-right'></span>
-                                <span>Add a match (SA Only)</span></a>
+                                <span>Add a match (admin only)</span></a>
                         </li>";
                 }
 

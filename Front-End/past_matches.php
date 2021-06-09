@@ -48,10 +48,10 @@
                 <?php 
                     if($_SESSION['role'] == 'admin'){
                         echo " <li><a href='add_rat.php'><span class='las la-id-badge'></span>
-                        <span>Add Rat</span></a>
+                        <span>Add Rat (admin only)</span></a>
                         </li>
                         <li><a href='create_bet.php'><span class='las la-caret-right'></span>
-                                <span>Add a match (SA Only)</span></a>
+                                <span>Add a match (admin only)</span></a>
                         </li>";
                     }
                 
@@ -159,12 +159,14 @@
                 </div>
                 <div style="padding-bottom: 3vh; padding-left:30%">
                     <h1 style="padding-bottom: 3vh; padding-left:10%">Select a date</h1>
-                    <input type="date" id="date" style="height: 7vh;">
+                    <?php 
+                    echo "<input type='date' id='date' style ='height: 7vh;' max ='".$date."'>"?>
+                    
                     <input type="submit" class="button button3" onclick="imu()" value="Display matches">
                 </div>
                     <div class="card">
                         <div class="card-header">
-                            <h3>All Past Matches</h3>
+                            <h3>Past Matches from the chosen date..</h3>
                         </div>
                         <div id = "result"></div>
                     </div>

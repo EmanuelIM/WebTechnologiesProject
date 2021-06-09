@@ -83,10 +83,10 @@
                 <?php 
                     if($_SESSION['role'] == 'admin'){
                         echo " <li><a href='add_rat.php' class='active'><span class='las la-id-badge'></span>
-                        <span>Add Rat</span></a>
+                        <span>Add Rat (admin only)</span></a>
                         </li>
                         <li><a href='create_bet.php'><span class='las la-caret-right'></span>
-                                <span>Add a match (SA Only)</span></a>
+                                <span>Add a match (admin only)</span></a>
                         </li>";
                     }
                 
@@ -100,7 +100,7 @@
                 <label for="nav-toggle">
                     <span class="las la-bars"></span>
                 </label>
-                Add rat
+                Add a new rat so it can compete!
             </h2>
             <div class="user-wrapper">
                 <?php
