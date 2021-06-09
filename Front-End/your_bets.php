@@ -8,11 +8,12 @@ if (!isset($_SESSION['username'])) {
 $query = "SELECT * FROM users WHERE nickname = '" . $_SESSION['username'] . "'";
 $select_comment_query = mysqli_query($connection, $query);
 $money = 0;
-$id =0;
+$id = 0;
 while ($row = mysqli_fetch_array($select_comment_query)) {
     $money = $row['money'];
     $id = $row['id'];
 }
+
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $total_ammount = trim($_POST['totalMoney']);
@@ -132,9 +133,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <th>Outcome</th>
                 </tr>
                 <?php
-                
 
-               if($id != 0){
+
+                if ($id != 0) {
                     $query = "SELECT * FROM tickets WHERE user_id = '{$id}'";
                     $select_comment_query = mysqli_query($connection, $query);
                     if (!$select_comment_query) {
@@ -144,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 ?>
                 <tbody>
                     <?php
-                    if($id!= 0){
+                    if ($id != 0) {
                         error_reporting(E_ERROR);
                         while ($row = mysqli_fetch_array($select_comment_query)) {
                             $number_of_matches = 0;
@@ -156,9 +157,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 die('QUERY FAILED' . mysqli_error($connection));
                             }
                             echo "<tr>";
-                            echo "<td>";
+                            
                             while ($row2 = mysqli_fetch_array($select_comment_query2)) {
-
+                                echo "<td>";
                                 $number_of_matches++;
                                 $query3 = "SELECT * FROM matches WHERE id = '{$row2['match_id']}'";
                                 $select_comment_query3 = mysqli_query($connection, $query3);
@@ -173,14 +174,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 $row3 = mysqli_fetch_array($select_comment_query4);
 
                                 $row4 = mysqli_fetch_array($select_comment_query3);
-                                
-                                if ($row2['name_rat_winner'] == '')
-                                {
+
+                                if ($row2['name_rat_winner'] == '') {
                                     $ongoing = 1;
-                                }
-                                else if ($row2['name_rat_winner'] == $row4['rat_winner']){
+                                } else if ($row2['name_rat_winner'] == $row4['rat_winner']) {
                                     $number_of_correct_matches++;
-                                } 
+                                }
                                 if ($row4['first_rat'] == $row2['name_rat_betted']) {
                                     echo "<b>" . $row4['first_rat'] . "</b> vs " . $row4['second_rat'] . "";
                                 } else {
@@ -191,11 +190,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 echo "<br>";
                             }
                             echo "</td>";
+                            if($number_of_matches > 0){
                             echo "<td>" . $number_of_matches . " </td>";
                             echo "<td>" . $number_of_correct_matches . "/" . $number_of_matches . " </td>";
                             echo "<td>" . $row['money_betted'] . "$";
                             echo "<td>" . $row['total_money'] . "$";
-                           
+
                             if ($ongoing == 1) {
                                 echo "<td style=' color:gray;'>ONGOING</td>";
                             } else if ($number_of_matches === $number_of_correct_matches) {
@@ -206,13 +206,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 while ($rowf = mysqli_fetch_array($select_comment_queryf)) {
                                     $money = $rowf['money'];
                                 }
-                                if($row['withdrawed'] == 0)
-                                {
+                                if ($row['withdrawed'] == 0) {
                                     echo "<br> <br> <h2> Congrats! You have winner tickets! Funds have been added to your account. Please check the dashboard for your money amount. </h2>";
-                                    updateMoney($connection,getId($connection,$_SESSION['username']),$money+$row['total_money']);
+                                    updateMoney($connection, getId($connection, $_SESSION['username']), $money + $row['total_money']);
                                     $withdraw_query = "UPDATE tickets SET withdrawed = 1 WHERE id = '{$row['id']}'";
                                     $update_status = mysqli_query($connection, $withdraw_query);
-                                    if(!$update_status ){
+                                    if (!$update_status) {
                                         die("Query failed" . mysqli_error($connection));
                                     }
                                 }
@@ -221,12 +220,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             }
                             echo "</tr>";
                         }
+                        echo "</tr>";
+                        }
                         echo "</table>";
                     }
                     ?>
 
-                    <div style="padding-left:40%; padding-top:3%;">  
+                    <div style="padding-left:40%; padding-top:3%;">
                         <a href="html_report.php" class="button button1"> HTML Report</a>
+                    </div>
+                    <div style="padding-left:40.5%; padding-top:1%;">
+                        <a href="csv_report.php" class="button button1"> CSV Report</a>
+                    </div>
+                    <div style="padding-left:40.2%; padding-top:1%;">
+                        <a href="json_report.php" class="button button1"> JSON Report</a>
                     </div>
         </main>
     </div>
