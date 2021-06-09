@@ -154,52 +154,19 @@
             </div>
             <div class="recent-grid">
                 <div class="projects">
-                <a href="index.php" class="button button3"> Today's Matches</a>
+                <div style="padding-left:40%; padding-bottom:3%;">
+                    <a href="index.php" class="button button3"> Today's Matches</a>
+                </div>
+                <div style="padding-bottom: 3vh; padding-left:30%">
+                    <h1 style="padding-bottom: 3vh; padding-left:10%">Select a date</h1>
+                    <input type="date" id="date" style="height: 7vh;">
+                    <input type="submit" class="button button3" onclick="imu()" value="Display matches">
+                </div>
                     <div class="card">
                         <div class="card-header">
                             <h3>All Past Matches</h3>
                         </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table width="100%">
-                                    <thead>
-                                        <tr>
-                                            <td>Match</td>
-                                            <td style="padding-left: 3%">Date</td>
-                                            <td style="padding-left: 2%;">Time</td>
-                                            <td style="">Winner</td>
-                                        </tr>
-                                    </thead>
-
-                                    <?php  
-                                        $query = "SELECT * FROM matches";
-                                        $select_comment_query = mysqli_query($connection, $query);
-                                        if(!$select_comment_query){
-                                            die('QUERY FAILED' . mysqli_error($connection));
-                                        }
-                                    ?>
-                                    <tbody>
-
-                                        <?php 
-                                        date_default_timezone_set('Europe/Bucharest');
-                                        $date = date('Y-m-d');
-                                            while($row = mysqli_fetch_array($select_comment_query)){
-                                                if($row['date'] < $date){
-                                                echo "<tr>";
-                                                echo "<td><a href='ratProfile.php?name=".$row['first_rat']."'>". $row['first_rat']  ."</a> vs <a href='ratProfile.php?name=".$row['second_rat']."'>". $row['second_rat']  ."</a></td>";
-                                               
-                                            echo "<td>".$row['date']."</td>";
-                                            echo "<td>".$row['time']."</td>";
-                                            echo "<td>Ionut</td>";
-                                            echo "</tr>";
-                                            }
-                                        }
-                                        ?>
-                                       
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        <div id = "result"></div>
                     </div>
                 </div>
                 
@@ -207,6 +174,21 @@
             </div>
         </main>
     </div>
+    <script type="text/javascript">
+        let content = document.getElementById('result');
+        function imu(){
+            let date = document.getElementById('date').value;
+            var XML = new XMLHttpRequest();
+            XML.onreadystatechange = function(){
+                if(XML.readyState == 4 && XML.status == 200){
+                    content.innerHTML = XML.responseText;
+                }
+            };
+            XML.open('GET','matches.php?date='+date,true);
+            XML.send();
+
+        }
+    </script>
     <script src="js/makeMaches.js"></script>
 </body>
 

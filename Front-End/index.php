@@ -193,7 +193,9 @@
             <form action="" method="post" id="update-form" autocomplete="off">
                 <div class="recent-grid">
                     <div class="projects">
-                    <a href="past_matches.php" class="button button1"> Past Matches</a>
+                    <div style="padding-left:40%; padding-bottom:3%;">
+                        <a href="past_matches.php" class="button button1"> Past Matches</a>
+                    </div>
                         <div class="card">
                             <div class="card-header">
                                 <h3>Today's and Future Matches</h3>

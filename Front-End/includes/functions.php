@@ -56,16 +56,17 @@ function email_exists($email,$connection){
     }
   }
 
-  function addrat($connection,$rat_name,$birthday,$description,$birthPlace,$gender,$club){
+  function addrat($connection,$rat_name,$birthday,$description,$birthPlace,$gender,$club,$photoLink){
     $rat_name   = mysqli_real_escape_string($connection, $rat_name);
     $birthday   = mysqli_real_escape_string($connection, $birthday);
     $description= mysqli_real_escape_string($connection, $description);
     $birthPlace = mysqli_real_escape_string($connection, $birthPlace);
     $gender     = mysqli_real_escape_string($connection, $gender);
     $club       = mysqli_real_escape_string($connection, $club);
+    $photoLink       = mysqli_real_escape_string($connection, $photoLink);
 
-    $query = "INSERT INTO rat (rat_name, birthday, description, birth_place, gender, club)";
-    $query .= "VALUES('{$rat_name}', '{$birthday}', '{$description}', '{$birthPlace}', '{$gender}', '{$club}')";
+    $query = "INSERT INTO rat (rat_name, birthday, description, birth_place, gender, club,photo_link)";
+    $query .= "VALUES('{$rat_name}', '{$birthday}', '{$description}', '{$birthPlace}', '{$gender}', '{$club}', '{$photoLink}')";
     $register_user_query = mysqli_query($connection, $query);
     if(!$register_user_query ){
         die("Query failed" . mysqli_error($connection));

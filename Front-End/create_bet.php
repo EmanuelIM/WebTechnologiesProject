@@ -18,12 +18,23 @@
         $secondodds   = trim($_POST['secondratodds']);
         $date         = trim($_POST['matchDate']);
         $time         = trim($_POST['matchTime']);
+        $password     = trim($_POST['password']);
 
         $error = [
 			'ratname' => '',
             'firstrat' =>'',
-            'secondrat' =>''
+            'secondrat' =>'',
+            'password' => ''
 		 ];
+
+
+        $query = "SELECT password,role FROM users WHERE nickname = '{$_SESSION['username']}'";
+        $select_user_query = mysqli_query($connection, $query);
+        $row = mysqli_fetch_array($select_user_query);
+        $db_password = $row['password'];
+        if(!password_verify($password, $db_password)){
+            $error['password'] = 'Wrong password';
+        }
 
          if($firstrat == $secondrat){
              $error['ratname'] = 'Rats must be should be different';
@@ -203,6 +214,13 @@
                 <label for="matchTime">Match Hour </label>
                 <input type="time" id="matchTime" name="matchTime" placeholder="">
 
+                <?php  
+                if(isset($error['password'])){
+					echo "<div>
+							<p style=' padding: 10px 0px; border-radius:1vh; background-color:red; text-align:center'>". $error['password']. "</p>
+						 </div>";
+                }
+                 ?><br>
                 <input type="password" id="pass" name="password"
                     placeholder="Super admin password to confirm your match..">
 

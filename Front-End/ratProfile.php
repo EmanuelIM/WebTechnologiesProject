@@ -9,6 +9,7 @@
     $birthPlace;
     $gender;
     $club;
+    $photo_link;
 
     if(isset($_GET['name'])){ 
 
@@ -27,7 +28,11 @@
         $birthPlace          = $row['birth_place'];
         $gender              = $row['gender'];
         $club                = $row['club'];
-
+        if($row['photo_link'] == null){
+            $photo_link = "images/RatMan.png";
+        }else{
+            $photo_link = $row['photo_link'];
+        }
     }
 ?>  
 
@@ -105,7 +110,7 @@
         <main>
             <h1 style="text-align: center;"><?php echo $ratname ?></h1>
             <div class="ratAlign">
-                <img src="images/RatMan.png" class="ratPicture" alt="">
+                <img src=" <?php echo $photo_link ?>" class="ratPicture" alt="">
             </div>
 
 

@@ -17,6 +17,7 @@
         $birthPlace  = trim($_POST['birthPlace']);
         $gender      = trim($_POST['gender']);
         $club        = trim($_POST['club']);
+        $photoLink   = trim($_POST['photoLink']);
 
 		$error = [
 			'ratname' => ''
@@ -39,7 +40,7 @@
 		 }
 
 		 if(empty($error)){
-			addrat($connection,$ratname,$birthDate,$description,$birthPlace,$gender,$club);
+			addrat($connection,$ratname,$birthDate,$description,$birthPlace,$gender,$club,$photoLink);
 		}
 	}
 ?>
@@ -129,6 +130,8 @@
                     <input type="date" id="birthDate" name="birthDate" placeholder="">
                     <label for="birthPlace">Birth Place </label>
                     <input type="text" id="birthPlace" name="birthPlace" placeholder="Paris">
+                    <label for="photoLink">Photo Link</label>
+                    <input type="text" id="photoLink" name="photoLink">
                     <label for="description">Short Description</label>
                     <input type="text" id="description" name="description">
                     <label for="gender">Gender</label>
