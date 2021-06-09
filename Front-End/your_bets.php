@@ -173,12 +173,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 $row3 = mysqli_fetch_array($select_comment_query4);
 
                                 $row4 = mysqli_fetch_array($select_comment_query3);
-                                if ($row2['id_rat_winner'] == 0)
+                                echo "<h1>" . $row2['name_rat_winner'] . " " . $row3['rat_winner'] . "</h1>";
+                                if ($row2['name_rat_winner'] == '')
                                 {
                                     $ongoing = 1;
                                 }
-                                else if ($row2['id_rat_winner'] === $row3['id']) $number_of_correct_matches++;
-                                if ($row4['first_rat'] === $row2['name_rat_betted']) {
+                                else if ($row2['name_rat_winner'] == $row3['rat_winner']){
+                                    $number_of_correct_matches++;
+                                } 
+                                if ($row4['first_rat'] == $row2['name_rat_betted']) {
                                     echo "<b>" . $row4['first_rat'] . "</b> vs " . $row4['second_rat'] . "";
                                 } else {
                                     echo "" . $row4['first_rat'] . " vs <b>" . $row4['second_rat'] . "</b>";
@@ -192,6 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             echo "<td>" . $number_of_correct_matches . "/" . $number_of_matches . " </td>";
                             echo "<td>" . $row['money_betted'] . "$";
                             echo "<td>" . $row['total_money'] . "$";
+                           
                             if ($ongoing == 1) {
                                 echo "<td style=' color:gray;'>ONGOING</td>";
                             } else if ($number_of_matches === $number_of_correct_matches) {
