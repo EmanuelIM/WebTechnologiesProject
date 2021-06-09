@@ -40,6 +40,7 @@
 
 		if(empty($error)){
 			login_user($username,$password,$connection);
+			determineWinner($connection);
 			exit();
 		}
 

@@ -76,6 +76,37 @@ function email_exists($email,$connection){
     }
   }
 
+  function determineWinner($connection){
+    $query  = "SELECT * FROM matches WHERE flag = 0";
+    $select_matches_query = mysqli_query($connection, $query);
+    while($row = mysqli_fetch_array($select_matches_query)){
+        if($row['date'] < date('Y-m-d') || ($row['time'] < date("H:i:s") && $row['date'] == date('Y-m-d'))){
+          $number = rand(1,2);
+          $rat_name;
+          $query_update = "UPDATE matches SET flag = 1, ";
+          if($number == 1){
+            $rat_name = $row['first_rat'];
+          }else{
+            $rat_name = $row['second_rat'];
+          }
+          $query_update .= "rat_winner = '{$rat_name}' ";
+          $query_update .= "WHERE id = '{$row['id']}'";
+          $update_match = mysqli_query($connection, $query_update);
+          if(!$update_match ){
+            die("Query failed" . mysqli_error($connection));
+          }
+
+          $query_update_match = "UPDATE matches_tickets SET ended = 1, ";
+          $query_update_match .= "name_rat_winner = '{$rat_name}' ";
+          $query_update_match .= "WHERE match_id = '{$row['id']}'";
+          $update_match_tickets = mysqli_query($connection, $query_update_match);
+          if(!$update_match_tickets ){
+            die("Query failed" . mysqli_error($connection));
+          }
+        }
+    }
+  }
+
   function  addbet($connection,$firstrat,$secondrat,$firstodds,$secondodds,$date,$time){
     $firstrat   = mysqli_real_escape_string($connection, $firstrat);
     $secondrat   = mysqli_real_escape_string($connection, $secondrat);
