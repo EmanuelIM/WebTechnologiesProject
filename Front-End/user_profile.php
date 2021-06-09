@@ -77,14 +77,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if ($second_name != $new_second_name) {
             $second_name = $new_second_name;
         }
-        if($avatar_link != $new_link){
+        if ($avatar_link != $new_link) {
             $avatar_link = $new_link;
         }
         if (!password_verify($new_password, $password) && $new_password != '') {
             $password = $new_password;
         }
 
-        update_user($connection, $username, $email, $password, $first_name, $second_name, $_SESSION['username'],$avatar_link);
+        update_user($connection, $username, $email, $password, $first_name, $second_name, $_SESSION['username'], $avatar_link);
     }
 }
 ?>
@@ -146,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </h2>
             <div class="user-wrapper">
                 <?php
-                    echo "<img src='" . $_SESSION['avatar_link'] . "' width='30px' height='30px' alt='no'>";
+                echo "<img src='" . $_SESSION['avatar_link'] . "' width='30px' height='30px' alt='no'>";
                 ?>
                 <div>
 
@@ -159,9 +159,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </div>
         </header>
         <main>
-        <?php
-                echo "<img src='" . $_SESSION['avatar_link'] . "' width='100px' height='auto' alt='' style='float:left; align-items: center; border: 5px solid #555';>";
-                ?>
+            <?php
+            echo "<img src='" . $_SESSION['avatar_link'] . "' width='100px' height='auto' alt='' style='float:left; align-items: center; border: 5px solid #555';>";
+            ?>
             <h2 style="padding-left: 10rem;">Hello, <?php echo $_SESSION['username'] ?>! (<?php echo $_SESSION['role'] ?>!)</h2>
             <br><br>
             <h3 style="padding-left: 10rem; padding-bottom: 30px;">Change your profile information below</h3>

@@ -110,7 +110,7 @@ function determineWinner($connection)
       if (!$update_match_tickets) {
         die("Query failed" . mysqli_error($connection));
       }
-      modifyLastMatches($connection,$rat_name,$loser_name);
+      modifyLastMatches($connection, $rat_name, $loser_name);
     }
   }
 }
@@ -118,51 +118,51 @@ function determineWinner($connection)
 function modifyLastMatches($connection, $rat_name, $loser_name)
 {
   $last_matches_winner = "SELECT * FROM rat WHERE rat_name = '{$rat_name}'";
-      $last_matches_loser = "SELECT * FROM rat WHERE rat_name = '{$loser_name}'";
-      $query_get_matches_1 = mysqli_query($connection, $last_matches_winner);
-      $query_get_matches_2 = mysqli_query($connection, $last_matches_loser);
-      while ($row = mysqli_fetch_array($query_get_matches_1)) {
-        $last_five_matches = $row['last_five_matches'];
-        $len = strlen($last_five_matches);
-        if ($len < 5) {
-          if ($len == 0) {
-            $last_five_matches = "W";
-          } else {
-            $last_five_matches .= "W";
-          }
-        } else {
-          for ($i = 1; $i < $len; ++$i) {
-            $last_five_matches[$i - 1] = $last_five_matches[$i];
-          }
-          $last_five_matches[4] = 'W';
-        }
-        $query_update_first_rat = "UPDATE rat SET last_five_matches = '{$last_five_matches}' where rat_name ='{$rat_name}' ";
-        $update_first_rat = mysqli_query($connection, $query_update_first_rat);
-        if (!$update_first_rat) {
-          die("Query failed" . mysqli_error($connection));
-        }
+  $last_matches_loser = "SELECT * FROM rat WHERE rat_name = '{$loser_name}'";
+  $query_get_matches_1 = mysqli_query($connection, $last_matches_winner);
+  $query_get_matches_2 = mysqli_query($connection, $last_matches_loser);
+  while ($row = mysqli_fetch_array($query_get_matches_1)) {
+    $last_five_matches = $row['last_five_matches'];
+    $len = strlen($last_five_matches);
+    if ($len < 5) {
+      if ($len == 0) {
+        $last_five_matches = "W";
+      } else {
+        $last_five_matches .= "W";
       }
-      while ($row1 = mysqli_fetch_array($query_get_matches_2)) {
-        $last_five_matches1 = $row1['last_five_matches'];
-        $len1 = strlen($last_five_matches1);
-        if ($len1 < 5) {
-          if ($len == 0) {
-            $last_five_matches1 = "L";
-          } else {
-            $last_five_matches1 .= "L";
-          }
-        } else {
-          for ($i = 1; $i < $len1; ++$i) {
-            $last_five_matches1[$i - 1] = $last_five_matches1[$i];
-          }
-          $last_five_matches1[4] = 'L';
-        }
-        $query_update_second_rat = "UPDATE rat SET last_five_matches = '{$last_five_matches1}' where rat_name ='{$loser_name}' ";
-        $update_second_rat = mysqli_query($connection, $query_update_second_rat);
-        if (!$update_second_rat) {
-          die("Query failed" . mysqli_error($connection));
-        }
+    } else {
+      for ($i = 1; $i < $len; ++$i) {
+        $last_five_matches[$i - 1] = $last_five_matches[$i];
       }
+      $last_five_matches[4] = 'W';
+    }
+    $query_update_first_rat = "UPDATE rat SET last_five_matches = '{$last_five_matches}' where rat_name ='{$rat_name}' ";
+    $update_first_rat = mysqli_query($connection, $query_update_first_rat);
+    if (!$update_first_rat) {
+      die("Query failed" . mysqli_error($connection));
+    }
+  }
+  while ($row1 = mysqli_fetch_array($query_get_matches_2)) {
+    $last_five_matches1 = $row1['last_five_matches'];
+    $len1 = strlen($last_five_matches1);
+    if ($len1 < 5) {
+      if ($len == 0) {
+        $last_five_matches1 = "L";
+      } else {
+        $last_five_matches1 .= "L";
+      }
+    } else {
+      for ($i = 1; $i < $len1; ++$i) {
+        $last_five_matches1[$i - 1] = $last_five_matches1[$i];
+      }
+      $last_five_matches1[4] = 'L';
+    }
+    $query_update_second_rat = "UPDATE rat SET last_five_matches = '{$last_five_matches1}' where rat_name ='{$loser_name}' ";
+    $update_second_rat = mysqli_query($connection, $query_update_second_rat);
+    if (!$update_second_rat) {
+      die("Query failed" . mysqli_error($connection));
+    }
+  }
 }
 
 function  addbet($connection, $firstrat, $secondrat, $firstodds, $secondodds, $date, $time)

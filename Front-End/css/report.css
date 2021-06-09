@@ -1,20 +1,22 @@
 h1 {
-    padding-top: 10vh;
-    padding-bottom: 5vh;
-    text-align: center;
-    font-size: 50px;
+  padding-top   : 10vh;
+  padding-bottom: 5vh;
+  text-align    : center;
+  font-size     : 50px;
 }
 
-table, td, th {
-    border: 1px solid black;
-  }
+table,
+td,
+th {
+  border: 1px solid black;
+}
 
-  table {
-    
-    width: 90%;
-    border-collapse: collapse;
-  }
+table {
 
-  .table_padding{
-    padding-left: 10%;
-  }
+  width          : 90%;
+  border-collapse: collapse;
+}
+
+.table_padding {
+  padding-left: 10%;
+}

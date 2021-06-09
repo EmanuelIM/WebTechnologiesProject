@@ -1,7 +1,7 @@
 body {
     font-family: Garamond, serif;
-    color: black;
-    margin: 0;
+    color      : black;
+    margin     : 0;
     /* The margin is the distance between the border of our element and other elements on the page */
 }
 
@@ -10,25 +10,25 @@ html {
 }
 
 .background {
-    height: 100vh;
+    height             : 100vh;
     /*Relative to 100% of the height of the viewport*/
-    background-image: linear-gradient(rgba(233, 157, 95, 0.5), rgba(233, 157, 95, 0.5)), url("../images/rat-race.jpg");
+    background-image   : linear-gradient(rgba(233, 157, 95, 0.5), rgba(233, 157, 95, 0.5)), url("../images/rat-race.jpg");
     /* We set the gradient of our image (rgb and transparency) */
     background-position: center;
-    background-size: cover;
-    overflow-x: hidden;
+    background-size    : cover;
+    overflow-x         : hidden;
     /* Specifies whether to trim content or not */
-    position: relative;
+    position           : relative;
 }
 
 .column {
-    margin: auto;
-    width: 33.3%;
-    margin-bottom: 16px;
-    padding: 3px 8px;
+    margin          : auto;
+    width           : 33.3%;
+    margin-bottom   : 16px;
+    padding         : 3px 8px;
     /* 3px top and bottom, 8px right and left */
     background-color: white;
-    opacity: 0.9;
+    opacity         : 0.9;
 }
 
 .card {
@@ -40,23 +40,23 @@ html {
 }
 
 .about-section {
-    padding: 20px;
-    padding-left: 260px;
-    text-align: center;
+    padding         : 20px;
+    padding-left    : 260px;
+    text-align      : center;
     background-color: #333;
-    color: white;
+    color           : white;
 }
 
 .button {
-    border: none;
-    padding: 30px;
-    margin-top: 20px;
-    color: white;
+    border          : none;
+    padding         : 30px;
+    margin-top      : 20px;
+    color           : white;
     background-color: #f1a10c;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 20px;
+    text-align      : center;
+    cursor          : pointer;
+    width           : 100%;
+    font-size       : 20px;
 }
 
 .button:hover {
@@ -64,22 +64,23 @@ html {
 }
 
 .resize {
-    width: 150px;
-    height: auto;
+    width        : 150px;
+    height       : auto;
     padding-right: 50px;
 }
 
 img {
-    width: 20px;
-    height: 20px;
-    display: inline;
+    width        : 20px;
+    height       : 20px;
+    display      : inline;
     padding-right: 10px;
 }
 
 @media screen and (max-width: 650px) {
+
     /*Responsive*/
     .column {
-        width: 100%;
+        width  : 100%;
         display: block;
     }
 }

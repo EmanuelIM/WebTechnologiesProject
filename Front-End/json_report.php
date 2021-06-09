@@ -32,9 +32,8 @@ while($row=mysqli_fetch_array($select_tickets_query)) {
   $posts[] = array('id'=> $json_id, 'money_betted'=> $json_money, 'potentialProfit'=> $json_total, 'elevation'=> $json_elev, 'matches'=> $json_matches, 'withdrawed'=> $json_withdrawed);
 } 
 
-$response['posts'] = $posts;
+$response['bets'] = $posts;
 
 $fp = fopen('php://output', 'wb');
 fwrite($fp, json_encode($response));
 fclose($fp);
-?>

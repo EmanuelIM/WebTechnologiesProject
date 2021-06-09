@@ -1,60 +1,60 @@
-<?php 
-	include "includes/db_connection.php";
-	include "includes/functions.php";
-	session_start();
+<?php
+include "includes/db_connection.php";
+include "includes/functions.php";
+session_start();
 
-	if($_SERVER['REQUEST_METHOD'] == "POST"){
-		$username    = trim($_POST['username']);
-		$email      = trim($_POST['email']);
-		$password   = trim($_POST['password']); 
-		$age   = trim($_POST['age']); 
-		$country   = trim($_POST['country']); 
-		$first_name  = trim($_POST['first_name']); 
-		$second_name = trim($_POST['second_name']);
-		$avatar_link = trim($_POST['avatar_link']);
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+	$username    = trim($_POST['username']);
+	$email      = trim($_POST['email']);
+	$password   = trim($_POST['password']);
+	$age   = trim($_POST['age']);
+	$country   = trim($_POST['country']);
+	$first_name  = trim($_POST['first_name']);
+	$second_name = trim($_POST['second_name']);
+	$avatar_link = trim($_POST['avatar_link']);
 
-		$error = [
-			'username' => '',
-			'email' => '',
-			'password' => ''
-		 ];
-		
-		if(strlen($username) < 4){
-			$error['username'] = 'Username needs to be longer';
-		 }
-		 if($username == ''){
-			$error['username'] = 'Username cannot be empty';
-		 }
-		 if(username_exists($username,$connection)){
-			$error['username'] = "Username already exists";
-		 }
+	$error = [
+		'username' => '',
+		'email' => '',
+		'password' => ''
+	];
 
-		 if($email ==''){
-			$error['email'] = "Email cannot be empty";
-		 }
-		 if(email_exists($email,$connection)){
-			$error['email'] = "Email already exists";
-		 }
+	if (strlen($username) < 4) {
+		$error['username'] = 'Username needs to be longer';
+	}
+	if ($username == '') {
+		$error['username'] = 'Username cannot be empty';
+	}
+	if (username_exists($username, $connection)) {
+		$error['username'] = "Username already exists";
+	}
 
-		 if(strlen($password) < 4){
-			$error['password'] = 'Password needs to be longer';
-		 }
-		 if($password == ''){
-			$error['password'] = 'Password cannot be empty';
-		 }
+	if ($email == '') {
+		$error['email'] = "Email cannot be empty";
+	}
+	if (email_exists($email, $connection)) {
+		$error['email'] = "Email already exists";
+	}
+
+	if (strlen($password) < 4) {
+		$error['password'] = 'Password needs to be longer';
+	}
+	if ($password == '') {
+		$error['password'] = 'Password cannot be empty';
+	}
 
 
-		 foreach ($error as $key => $value) {
-			if(empty($value)){
-				unset($error[$key]);
-			}
-		 }
-
-		 if(empty($error)){
-			if ($avatar_link =='') $avatar_link = 'https://png.pngtree.com/png-clipart/20200224/original/pngtree-cute-rat-avatar-with-a-yellow-background-png-image_5205694.jpg';
-			register_user($connection,$username,$email,$password,$first_name,$second_name,$age,$country,$avatar_link);
+	foreach ($error as $key => $value) {
+		if (empty($value)) {
+			unset($error[$key]);
 		}
 	}
+
+	if (empty($error)) {
+		if ($avatar_link == '') $avatar_link = 'https://png.pngtree.com/png-clipart/20200224/original/pngtree-cute-rat-avatar-with-a-yellow-background-png-image_5205694.jpg';
+		register_user($connection, $username, $email, $password, $first_name, $second_name, $age, $country, $avatar_link);
+	}
+}
 ?>
 
 <!DOCTYPE html>
@@ -65,9 +65,7 @@
 	<link rel="stylesheet" type="text/css" href="css/login_style.css">
 	<link rel="stylesheet" type="text/css" href="css/landing_style.css">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-		integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-		crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -92,7 +90,7 @@
 			<img src="images/rats.png">
 		</div>
 		<div class="login-content">
-			<form  style="height:700px; overflow-y:auto;" action="" method="post" id="login-form" autocomplete="off">
+			<form style="height:700px; overflow-y:auto;" action="" method="post" id="login-form" autocomplete="off">
 				<h2 class="title">NEW HERE?</h2>
 				<div class="input-div one">
 					<div class="i">
@@ -100,7 +98,7 @@
 					</div>
 					<div class="div">
 						<h5>First Name</h5>
-						<input type="text" class="input" name="first_name" id="first_name" autocomplete="on" >
+						<input type="text" class="input" name="first_name" id="first_name" autocomplete="on">
 					</div>
 				</div>
 				<div class="input-div one">
@@ -127,21 +125,21 @@
 					</div>
 					<div class="div">
 						<h5>Username</h5>
-						<input type="text" class="input" name="username" id="username" autocomplete="on" >
+						<input type="text" class="input" name="username" id="username" autocomplete="on">
 					</div>
 				</div>
-				<?php  if(isset($error['username'])){
+				<?php if (isset($error['username'])) {
 					echo "<div >
-							<p  style='height:4vh;border-radius:1vh; background-color:red; text-align:center; padding-top:1vh;'>". $error['username']. "</p>
+							<p  style='height:4vh;border-radius:1vh; background-color:red; text-align:center; padding-top:1vh;'>" . $error['username'] . "</p>
 						 </div>";
-				}?>
+				} ?>
 				<div class="input-div one">
 					<div class="i">
 						<i class="fas fa-user"></i>
 					</div>
 					<div class="div">
 						<h5>age</h5>
-						<input type="text" class="input" name="age" id="age" autocomplete="on" >
+						<input type="text" class="input" name="age" id="age" autocomplete="on">
 					</div>
 				</div>
 				<div style="padding-bottom: 1.3vh;">
@@ -150,7 +148,7 @@
 												padding-bottom: 2vh;
 												color: #999;
 												font-size: 18px;">Country</h5>
-					<select name="country" id="country" autocomplete="on" style="padding-top: 1vh; width:100%; font-size: 1.2rem; color: #555; font-family: 'poppins', sans-serif;" >
+					<select name="country" id="country" autocomplete="on" style="padding-top: 1vh; width:100%; font-size: 1.2rem; color: #555; font-family: 'poppins', sans-serif;">
 						<option value="">-</option>
 						<option value="Afghanistan">Afghanistan</option>
 						<option value="Albania">Albania</option>
@@ -271,7 +269,7 @@
 						<option value="Kyrgyzstan">Kyrgyzstan</option>
 						<option value="Lao">Lao People's Democratic Republic</option>
 						<option value="Latvia">Latvia</option>
-						<option value="Lebanon" >Lebanon</option>
+						<option value="Lebanon">Lebanon</option>
 						<option value="Lesotho">Lesotho</option>
 						<option value="Liberia">Liberia</option>
 						<option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
@@ -331,12 +329,12 @@
 						<option value="Romania">Romania</option>
 						<option value="Russia">Russian Federation</option>
 						<option value="Rwanda">Rwanda</option>
-						<option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option> 
+						<option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
 						<option value="Saint LUCIA">Saint LUCIA</option>
 						<option value="Saint Vincent">Saint Vincent and the Grenadines</option>
 						<option value="Samoa">Samoa</option>
 						<option value="San Marino">San Marino</option>
-						<option value="Sao Tome and Principe">Sao Tome and Principe</option> 
+						<option value="Sao Tome and Principe">Sao Tome and Principe</option>
 						<option value="Saudi Arabia">Saudi Arabia</option>
 						<option value="Senegal">Senegal</option>
 						<option value="Seychelles">Seychelles</option>
@@ -402,9 +400,9 @@
 						<input class="input" type="email" name="email" id="email" class="form-control" autocomplete="on">
 					</div>
 				</div>
-				<?php  if(isset($error['email'])){
+				<?php if (isset($error['email'])) {
 					echo "<div>
-							<p style='height:4vh;border-radius:1vh; background-color:red; text-align:center; padding-top:1vh;'>". $error['email']. "</p>
+							<p style='height:4vh;border-radius:1vh; background-color:red; text-align:center; padding-top:1vh;'>" . $error['email'] . "</p>
 						 </div>";
 				}
 				?>
@@ -414,12 +412,12 @@
 					</div>
 					<div class="div">
 						<h5>Password</h5>
-						<input class="input" type="password" name="password" id="key" class="form-control" >
-                    </div>
+						<input class="input" type="password" name="password" id="key" class="form-control">
+					</div>
 				</div>
-				<?php  if(isset($error['password'])){
+				<?php if (isset($error['password'])) {
 					echo "<br><div>
-							<p style='height:4vh;border-radius:1vh; background-color:red; text-align:center; padding-top:1vh;'>". $error['password']. "</p>
+							<p style='height:4vh;border-radius:1vh; background-color:red; text-align:center; padding-top:1vh;'>" . $error['password'] . "</p>
 						 </div>";
 				}
 				?>

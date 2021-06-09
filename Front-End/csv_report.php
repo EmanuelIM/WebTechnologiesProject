@@ -32,4 +32,3 @@ foreach ($CSV as $line) {
     fputcsv($fp, $line, ',');
 }
 fclose($fp);
-?>

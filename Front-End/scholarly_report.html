@@ -22,7 +22,18 @@
           <li>
           <li><a href="#userint"><span>3.2 </span>User Interactions</a></li>
         </ol>
-      <li><a href="#resp"><span>4.</span>Team Members's Responsibilities</a></li>
+      <li><a href="#tech"><span>4. </span>Technologies used</a>
+        <ol role="directory">
+          <li><a href="#htmlcssjs"><span>4.1 </span>HTML5 / CSS3 / JavaScript</a></li>
+          <li>
+          <li><a href="#PHP"><span>4.2 </span>PHP</a></li>
+          <li>
+          <li><a href="#mySQL"><span>4.3 </span>MySQL</a></li>
+          <li>
+          <li><a href="#ajax"><span>4.3 </span>Ajax</a></li>
+        </ol>
+      <li><a href="#resp"><span>5.</span>Team Members's Responsibilities</a></li>
+      <li><a href="#bibl"><span>6.</span>Bibliography</a></li>
     </ol>
     <dl>
       <dt>Authors</dt>
@@ -84,10 +95,10 @@
           Modifying the profile: The user can change their username, avatar, email and any other info
         </li>
         <li>Seeing a bet history: Users can see a history of their bets and they can check if the bets were successful
-          or not.</li>
+          or not. They can also download their bet history in HTML/CSV/JSON formats.</li>
         <li>Checking a rat profile: Users can see the status of a rat's last five races, as well as information about
           that rat.</li>
-        <li>Adding a match (SA): Admins can add matches for normal users to view and bet on.</li>
+        <li>Adding a match : Admins can add matches for normal users to view and bet on.</li>
       </ul>
     </section>
     <section id="userint">
@@ -103,26 +114,96 @@
           <li>Dashboard</li>
           <li>User Profile Settings</li>
           <li>Your Bets</li>
-          <li>Add a match(SA Only)</li>
-          <li>Rat Profile</li>
           <li>Add Money</li>
+          <li>Add a match (Admin only)</li>
+          <li>Add a rat (Admin only)</li>
+
         </ul>
-        <li>On the Dashboard Page, the user can see general information about how many matches are today and place a bet
-          if he want, he can see how much money does he have.</li>
-        <li>On the User Profile Settings Page, the user can change his personal informations.</li>
-        <li>On the Your Bets Page, the user can see his tickets and if he won or not.</li>
-        <li>On the Add a match Page, the super admin can add a match or delete it.</li>
+        <li>On the Dashboard Page, the user can see general information about how many matches are today and in the
+          future and place a bet
+          if he want, he can see how much money he has. <br> All of the matches have two rats. Each user can place a bet
+          consisting
+          of one or multiple matches (on the same ticket). The elevation is calculated by adding each elevation the user
+          pressed on.
+          The possible profit is calculated by multiplying the amount of money the user wants to bet with the total
+          elevation. If the user places
+          his bet, it will apear on the Your Bets page and the winner will be chosen at random after the match is over
+          (15 minutes after starting time). </li>
+        <li>On the Past Matches Page, the user can choose a date and have all the matches from that day, with their
+          outcomes, displayed.</li>
+        <li>On the User Profile Settings Page, the user can change his personal information.</li>
+        <li>On the Your Bets Page, the user can see his tickets and if he won or not. If a ticket was guessed correctly
+          (i.e. all the matches on the ticket were guessed correctly), funds will be added automatically to the user's
+          account when accessing this page.</li>
+        <li>On the Add a match Page, the admin can add a match or delete it.</li>
         <li>On the Rat Profile Page, the user can see all information about one specific rat.</li>
-        <li>On the Add money Page, the user can add money or withdraw.</li>
+        <li>On the Add money Page, the user can add money (valid credit card number is required as a regex is used)</li>
       </ol>
     </section>
     </p>
-    <section id="resp">
+    <section id="tech">
       <!-- review? -->
-      <h2><span>4. </span>Team Members's Responsibilities</h2>
-      <ul>
-        <li>Iacob Marcel-Emanuel: Developing the landing page, the about page, the user profile page, the bet history
-          page and the create bet page. </li>
-        <li>Logofatu Ionut-Nicusor: Developing the login/sign up pages, the index page and the rat profile page.</li>
-      </ul>
-    </section>
+      <h2><span>4. </span>Technologies used</h2>
+      <section id="htmlcssjs">
+        <h3><span>4.1 </span>HTML5 / CSS3 / JavaScript</h3>
+        <ul>
+          <li>HTML5: The standard markup language for displaying documents in a browser. It is the backbone of the
+            front-end.</li>
+          <li>CSS3: The style sheet language used for describing the presentation of a document written in HTML. Heavily
+            used in styiling our website.</li>
+          <li>JavaScript: Mainly used for placing bets. The user clicks the buttons which have the elevations written on
+            them and, using JS, we can deactivate or reactivate buttons and modify the final sum according to the
+            buttons we pressed.</li>
+        </ul>
+      </section>
+      <section id="PHP">
+        <h3><span>4.2 </span>PHP</h3>
+        PHP is a general-purpose, server side scripting language, suited for web development, that can be embedded in
+        HTML.
+        It is used mainly for managing a database, to track sessions and to do verifications which wouldn't be possible
+        without scripting in general.
+        In our application it is used often to query the database to print on the screen certain things, like the
+        current user's bets, all of today's matches or the current user's information.
+        It is also used to check the user's role, to redirect users which are not logged in, or to generate reports
+        (HTML/CSV/JSON).
+      </section>
+      <section id="mySQL">
+        <h3><span>4.3 </span>MySQL</h3>
+        MySQL is a very popular DBMS, which we use to manage our database and our tables. We have 5 tables in our
+        database, used by PHP in queries.
+        <li>Users: Keeps track of all the registered users (name, age, email and so on). </li>
+        <li>Rat: Keeps information related to rats, like their performance, their name, their place of birth. </li>
+        <li>Matches: Has information about the participants and the status of a match. </li>
+        <li>Tickets: Keeps information about the bets placed by the users (like the profit or the rat they betted on).
+        </li>
+        <li>Matches_Tickets: The table which connects the Matches and the Tickets tables (as a ticket can have multiple
+          matches betted on). </li>
+      </section>
+      <section id="ajax">
+        <h3><span>4.4 </span>Ajax</h3>
+        Ajax is a set of web development techniques using many web technologies on the client-side to create
+        asynchronous web applications.
+        With Ajax, web applications can send and retrieve data from a server asynchronously without interfering with the
+        display and behaviour of the existing page.
+        We use Ajax for the past matches page, as we retrieve matches from a certain date without refreshing the page.
+        (after the user chooses the date).
+      </section>
+      <section id="resp">
+        <!-- review? -->
+        <h2><span>5. </span>Team Members's Responsibilities</h2>
+        Many of the pages have code from both of the teammates, but the main responsibilities as we assigned them were:
+        <ul>
+          <li>Iacob Marcel-Emanuel: Developing the landing page, the about page, the user profile page, the bet history
+            page and the create bet page. The HTML, CSV and JSON report pages. </li>
+          <li>Logofatu Ionut-Nicusor: Developing the login/sign up pages, the index page and the rat profile page.
+            Many of the PHP functions and pages including adding a rat page, the dashboard, log in, sign up and the Ajax
+            functionality.Debugging and testing.
+          </li>
+        </ul>
+      </section>
+      <section id="bibl">
+        <h2><span>6. </span>Bibliography</h2>
+        <a href="https://en.wikipedia.org/wiki/PHP"> PHP</a>
+        <a href="https://en.wikipedia.org/wiki/Ajax_(programming)"> Ajax</a>
+        <a href="https://en.wikipedia.org/wiki/MySQL"> MySQL</a>
+      </section>

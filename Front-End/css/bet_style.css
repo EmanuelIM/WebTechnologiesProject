@@ -1,11 +1,11 @@
 #bets {
   border-collapse: collapse;
   /* Smaller borders*/
-  width: 100%;
+  width          : 100%;
 }
 
 caption {
-  color: black;
+  color    : black;
   font-size: 30pt;
 }
 
@@ -14,8 +14,8 @@ caption {
 
 #bets th {
   text-align: center;
-  border: 1px solid #ddd;
-  padding: 8px;
+  border    : 1px solid #ddd;
+  padding   : 8px;
 }
 
 #bets tr:nth-child(even) {
@@ -28,9 +28,9 @@ caption {
 }
 
 #bets th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
+  padding-top     : 12px;
+  padding-bottom  : 12px;
+  text-align      : left;
   background-color: #f1a10c;
-  color: white;
+  color           : white;
 }
