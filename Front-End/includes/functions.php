@@ -328,23 +328,20 @@ function addMatchesTickest($connection,$rat_id){
     $date = date('Y-m-d');
     $current_time = date("H:i:s");
     for($i =0;$i < count($rat_id[0]); $i++){
-        echo $rat_id[0][$i] ."\xA";
-        $query = "SELECT * FROM matches ORDER BY date,time ASC";
+        $query = "SELECT * FROM matches WHERE flag =0 ORDER BY date,time ASC";
         $select_matches_query = mysqli_query($connection, $query);
         $tmp_count = 1;
         while($tmp_count <= $rat_id[0][$i] && $row = mysqli_fetch_array($select_matches_query)){
             $time = $row['time'];
             $match_time = date("H:i:s",strtotime($time));
             $match_end_time = date("H:i:s",strtotime($match_time . " - 10 minutes"));
-            if($current_time < $match_end_time && $date <= $row['date']){
+            if($current_time < $match_end_time || ($current_time > $match_end_time &&  $date < $row['date'])){
                 if($tmp_count == $rat_id[0][$i]){
-                    addMatchTicket($connection,$id_ticket,$row['id'],$row['first_rat']);
-                    echo "<h1> " . $row['first_rat'] . " </h1>";
+                  addMatchTicket($connection,$id_ticket,$row['id'],$row['first_rat']);
                 }
                 $tmp_count++;
                 if($tmp_count == $rat_id[0][$i]){
-                    addMatchTicket($connection,$id_ticket,$row['id'],$row['second_rat']);
-                    echo "<h1> " . $row['second_rat'] . " </h1>";
+                   addMatchTicket($connection,$id_ticket,$row['id'],$row['second_rat']);
                 }
                 $tmp_count++;
             }
