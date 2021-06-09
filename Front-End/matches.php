@@ -27,7 +27,7 @@
             echo "<td><a href='ratProfile.php?name=".$row['first_rat']."'>". $row['first_rat']  ."</a> vs <a href='ratProfile.php?name=".$row['second_rat']."'>". $row['second_rat']  ."</a></td>";
             echo "<td>".$row['date']."</td>";
             echo "<td>".$row['time']."</td>";
-            echo "<td>Ionut</td>";
+            echo "<td>".$row['rat_winner']."</td>";
             echo "</tr>";
         }
 
