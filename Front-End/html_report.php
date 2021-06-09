@@ -59,7 +59,7 @@
                         echo "<th> " . $row['total_money'] ."</th>";
                         echo "<th> " . $row['total_elevation'] ."</th>";
                         echo "<th> " . $row['total_matches'] ."</th>";
-                        if($row['withdrawed'] == 0){
+                        if($row['withdrawed'] == 1){
                             echo "<th>True</th>";
                         }else{
                             echo "<th>False</th>";

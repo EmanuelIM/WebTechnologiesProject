@@ -173,12 +173,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                 $row3 = mysqli_fetch_array($select_comment_query4);
 
                                 $row4 = mysqli_fetch_array($select_comment_query3);
-                                echo "<h1>" . $row2['name_rat_winner'] . " " . $row3['rat_winner'] . "</h1>";
                                 if ($row2['name_rat_winner'] == '')
                                 {
                                     $ongoing = 1;
                                 }
-                                else if ($row2['name_rat_winner'] == $row3['rat_winner']){
+                                else if ($row2['name_rat_winner'] == $row4['rat_winner']){
                                     $number_of_correct_matches++;
                                 } 
                                 if ($row4['first_rat'] == $row2['name_rat_betted']) {
