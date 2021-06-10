@@ -421,7 +421,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 						 </div>";
 				}
 				?>
-				<a href="#">Forgot Password?</a>
 				<input type="submit" name="signup" class="btn" value="Enter the world of BetR!">
 			</form>
 		</div>

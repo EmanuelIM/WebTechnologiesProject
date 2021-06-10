@@ -111,7 +111,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 						 </div>";
 				}
 				?>
-				<a href="#">Forgot Password?</a>
 				<input type="submit" class="btn" value="Login">
 			</form>
 		</div>

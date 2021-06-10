@@ -114,7 +114,7 @@ if (isset($_GET['name'])) {
 
 
             <table style="width:100%;" id="bets">
-                <caption>Last Five Matches</caption>
+                <caption style="text-align: center;">Last Five Matches</caption>
                 <tr>
                     <?php
                     $len = strlen($last_five_matches);
