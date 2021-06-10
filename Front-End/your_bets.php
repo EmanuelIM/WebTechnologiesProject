@@ -176,7 +176,7 @@
                                     $row4 = mysqli_fetch_array($select_comment_query3);
                                     if ($row2['name_rat_winner'] == '') {
                                         $ongoing = 1;
-                                    } else if ($row2['name_rat_winner'] == $row4['rat_winner']) {
+                                    } else if ($row2['name_rat_winner'] == $row2['name_rat_betted']) {
                                         $number_of_correct_matches++;
                                     }
                                     if ($row4['first_rat'] == $row2['name_rat_betted']) {
